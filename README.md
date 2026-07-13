@@ -1,1 +1,1 @@
-# -internship-cloud-solution-design
+# internship-cloud-solution-design
