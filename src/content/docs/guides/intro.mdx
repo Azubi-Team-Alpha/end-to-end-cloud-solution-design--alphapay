@@ -1,37 +1,63 @@
 ---
-title: Introduction to AlphaPay Services
-description: Explore AlphaPay's comprehensive documentation for an in-depth look at our premium tools and construction services.
+title: AlphaPay API Overview
+description: Complete reference for AlphaPay's RESTful Payments API — transfers, collections, wallets, and cross-border transactions.
 sidebar:
-  label: Introduction to Services
+  label: API Overview
   order: 2
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-As part of our commitment to providing an end-to-end solution for all your construction and hardware needs, we at AlphaPay are proud to offer a comprehensive suite of professional services. From initial consultations to final inspections, our multifaceted services encompass the entirety of your project, ensuring quality results and client satisfaction. This section of the documentation will guide you through everything you need to know to leverage our expertise to its fullest potential.
+AlphaPay's RESTful API gives developers full programmatic control over payments, transfers, wallet management, and cross-border transactions across Africa. This section provides an overview of our API capabilities and how to integrate them into your platform.
 
-## Overview of Services
+## API Capabilities
 
 <Tabs>
-  <TabItem label="Tailored Solutions">
-    Each construction project carries its unique challenges and demands. At
-    AlphaPay, we customize our services to match your specific needs, ensuring
-    that no matter the scale or complexity of your project, our team is equipped
-    to handle it with precision and professionalism.
+  <TabItem label="Transfers">
+    Initiate instant money transfers to any bank account or mobile money wallet across 15+ African countries. Support for single transfers, bulk disbursements, and scheduled payments. All transfers settle in under 2 seconds with full webhook notifications.
   </TabItem>
-  <TabItem label="Expert Team">
-    Leverage the skills of our knowledgeable staff, from architects and
-    engineers to skilled laborers, each contributing their expertise to bring
-    your vision to life.
+  <TabItem label="Collections">
+    Accept incoming payments from customers via our hosted checkout page, inline payment form, or direct API. Supports mobile money, bank cards, and bank transfer. Real-time webhook events on payment success, failure, and refunds.
   </TabItem>
-  <TabItem label="Commitment to Quality">
-    Quality is at the heart of everything we do. We employ stringent quality
-    control measures to assure that the work we deliver meets and exceeds
-    industry standards.
+  <TabItem label="Wallets">
+    Programmatically create and manage wallets, query balances, retrieve transaction history, and issue virtual cards. Full support for multi-currency wallets in GHS, NGN, KES, UGX, RWF, and USD.
   </TabItem>
-  <TabItem label="Ongoing Support">
-    Our relationship with our clients doesn't end once the project is completed.
-    We provide continuous support to address any issues and ensure lasting
-    satisfaction with your investment.
+  <TabItem label="Cross-Border FX">
+    Get real-time mid-market exchange rates across all supported currency corridors, initiate cross-border transfers, and track settlement status via our FX API. Rates are updated every 60 seconds.
   </TabItem>
 </Tabs>
+
+## Base URL & Authentication
+
+All API requests are made to:
+
+```
+https://api.alphapay.africa/v1/
+```
+
+Authenticate by including your API key in the Authorization header:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+API keys are available from the **Developer** section of your AlphaPay dashboard. Always use **test-mode keys** during development and **live-mode keys** only in production.
+
+## Rate Limits & SLAs
+
+| Tier | Rate Limit | Uptime SLA |
+|---|---|---|
+| Personal | 100 req/min | 99.9% |
+| Business | 1,000 req/min | 99.99% |
+| Enterprise | Unlimited (negotiated) | 99.99% + dedicated support |
+
+## Supported Mobile Networks
+
+AlphaPay integrates directly with the following networks across our supported countries:
+
+- **Ghana**: MTN Mobile Money, Telecel Cash, AirtelTigo Money
+- **Nigeria**: Bank transfers (all commercial banks via NIP)
+- **Kenya**: M-Pesa (Safaricom), Airtel Money
+- **Uganda**: MTN Mobile Money, Airtel Money
+- **Senegal / Côte d'Ivoire**: Orange Money, Wave
+- **Rwanda**: MTN Mobile Money, Airtel Money

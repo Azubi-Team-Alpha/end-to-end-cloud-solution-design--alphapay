@@ -1,8 +1,8 @@
 ---
-title: First Project Checklist
-description: Explore AlphaPay's comprehensive documentation for an in-depth look at our premium tools and construction services. 
+title: Integration Checklist
+description: Step-by-step checklist for integrating AlphaPay payments into your application.
 sidebar:
-  label: First Project Checklist
+  label: Integration Checklist
   order: 3
 ---
 import {
@@ -15,51 +15,74 @@ import {
   TabItem,
 } from "@astrojs/starlight/components";
 
-Embarking on a new project can be exciting and challenging in equal measure. With the right preparation and guidance, your venture is poised for success. The AlphaPay First Project Checklist is designed to provide a clear and structured approach to ensure you're well-prepared every step of the way.
+Use this checklist to ensure your AlphaPay integration is complete, secure, and production-ready before going live.
 
-## Project Preparation
+## Pre-Integration Setup
 
 <CardGrid>
-  <Card title="Scope and Objectives">
-    - Ensure clarity of the project's scope, deliverables, and desired outcomes
-    - Define clear objectives and success criteria for project completion
+  <Card title="Account & KYC">
+    - Create your AlphaPay Business account at alphapay.africa
+    - Complete business KYC (RC number, directors ID, bank statement)
+    - Activate your business account — approval in under 24 hours
   </Card>
-  <Card title="Tools and Equipment">
-    - Make a list of all required AlphaPay tools and equipment
-    - Verify inventory availability and condition before starting
+  <Card title="API Keys & Environments">
+    - Retrieve your **test-mode** API key from the Developer dashboard
+    - Set up a `.env` file with `ALPHAPAY_SECRET_KEY` and `ALPHAPAY_PUBLIC_KEY`
+    - Confirm test-mode transfers work in the sandbox environment
   </Card>
-  <Card title="Arranging Services">
-    - If additional expertise or manpower is needed, arrange for AlphaPay construction services in advance
-    - Clarify service level agreements and timelines with your AlphaPay representative
+  <Card title="Webhook Configuration">
+    - Register a publicly accessible webhook endpoint URL in your dashboard
+    - Implement signature verification using your webhook secret
+    - Test webhook delivery using the dashboard's "Send Test Event" feature
   </Card>
 </CardGrid>
 
-## Project Execution
-### Initial Phase
+## Integration Steps
+
+### Backend Integration
 <Steps>
-1. Set up the project site according to AlphaPay setup guidelines
+1. Install the AlphaPay SDK for your platform (Node.js, Python, or PHP) or use raw REST calls
 
-2. Conduct an initial team meeting to align on project goals and AlphaPay methodologies
+2. Implement the **Initiate Transfer** endpoint for outbound payments
 
-3. Establish project checkpoints and milestones for regular assessment
+3. Implement the **Payment Collection** endpoint or embed the hosted checkout for inbound payments
+
+4. Set up your webhook handler to process `transfer.success`, `transfer.failed`, and `payment.received` events
+
 </Steps>
 
+### Going Live
+
+<Aside type="caution">
+  Before switching to live-mode API keys, ensure all webhook signature validations are in place and you have tested failure scenarios (insufficient funds, invalid account) in sandbox.
+</Aside>
+
+<Steps>
+1. Replace test-mode API keys with live-mode keys in your production environment variables
+
+2. Set transaction limits appropriate to your expected volumes
+
+3. Verify KYC and compliance documentation is fully approved for your business account
+
+4. Monitor your first live transactions via the AlphaPay merchant dashboard
+
+</Steps>
 
 ## Additional Resources
 <CardGrid>
 <LinkCard
-  title="Detailed Guides"
-  description="Access in-depth documentation and user manuals for AlphaPay tools and services."
+  title="Full API Reference"
+  description="Complete documentation for all AlphaPay API endpoints, request/response schemas, and error codes."
+  href="/guides/intro"
+/>
+<LinkCard
+  title="Webhook Events Reference"
+  description="All supported webhook event types, payload schemas, and retry behaviour."
   href="/guides/getting-started"
 />
 <LinkCard
-  title="Support Contacts"
-  description="Keep handy the contact details for AlphaPay support, available for assistance throughout your project."
-  href="/guides/getting-started"
-/>
-<LinkCard
-  title="Advanced Learning"
-  description="Explore further educational resources provided by AlphaPay to refine your skills and knowledge base."
-  href="/guides/getting-started"
+  title="Advanced Topics"
+  description="Bulk disbursements, FX API, AML compliance, and AWS deployment architecture."
+  href="/advanced/technical-specifications"
 />
 </CardGrid>

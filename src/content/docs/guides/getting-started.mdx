@@ -1,6 +1,6 @@
 ---
-title: Getting Started
-description: Explore AlphaPay's comprehensive documentation for an in-depth look at our premium tools and construction services. 
+title: Getting Started with AlphaPay
+description: Set up your AlphaPay account, complete KYC verification, and make your first API call in minutes.
 sidebar:
   label: Getting Started
   order: 1
@@ -16,66 +16,81 @@ import {
   TabItem,
 } from "@astrojs/starlight/components";
 
-Welcome to AlphaPay Docs! We're excited to help you get started with our premium tools. This guide is designed to introduce you to our tool range, help you understand the basics, and get you up to speed for your first project. Let's jump right into the world of high-quality, reliable craftsmanship with AlphaPay.
+Welcome to AlphaPay! This guide will walk you through creating your account, completing identity verification, and making your first transfer or API call. Let's get you up and running in under 5 minutes.
 
-## Tools Overview
+## Platform Overview
 
 <CardGrid>
-  <Card title="ScrewDriver Set" icon="seti:config">
-    Versatile and ergonomic, suitable for all screw types.
-    <LinkCard title="Learn More " href="/guides/getting-started" />
+  <Card title="Personal Wallet" icon="seti:config">
+    Send, receive, and manage money with zero local transfer fees.
+    <LinkCard title="Open a free account" href="#" />
   </Card>
-  <Card title="Hammer Drill" icon="seti:pipeline">
-    Powerful performance for drilling and impact driving.
-    <LinkCard title="Learn More " href="/guides/getting-started" />
+  <Card title="Virtual Visa Card" icon="seti:pipeline">
+    Generate a virtual card instantly for online and international payments.
+    <LinkCard title="Get your card" href="#" />
   </Card>
-  <Card title="Power Saws" icon="seti:crystal">
-    Precision cutting with adjustable settings for various materials.
-    <LinkCard title="Learn More " href="/guides/getting-started" />
+  <Card title="Payments API" icon="seti:crystal">
+    Integrate AlphaPay into your platform with our RESTful API.
+    <LinkCard title="View API Reference" href="/guides/intro" />
   </Card>
 </CardGrid>
 
-## Setup Instructions
+## Account Setup Steps
 
 <Steps>
 
-1. Unboxing Icon Unbox Your AlphaPay Tools
-   Carefully open the packaging and verify all components are present. Familiarize yourself with the tool and any accessories.
+1. **Create your AlphaPay account**
+   Visit alphapay.africa and sign up with your phone number or email. A one-time passcode (OTP) will be sent for verification.
 
-2. Safety Check Icon Initial Setup and Safety Checks
-   Read the safety manual before handling the tool. Check the tool for any shipping damage and ensure safety guards are in place.
+2. **Complete KYC identity verification**
+   Upload a valid government-issued ID (passport, national ID, or driver's licence) and a selfie. Verification completes in under 2 minutes for most users.
 
-3. Calibration Icon Calibration and Preparation for First Use
-   Follow the manufacturer's instructions to calibrate your tools as required. Ensure batteries are charged or electrical connections are secure.
+3. **Fund your wallet**
+   Add money via bank transfer, mobile money (MTN, Telecel, AirtelTigo), or debit/credit card. Your balance is available instantly.
+
+4. **Make your first transfer**
+   Enter the recipient's phone number or account number, select the amount, and confirm. Money arrives in under 2 seconds.
 
 </Steps>
 
 
-## Cleaning and Maintenance
+## Developer Quickstart
 
 <Aside type="tip">
-  Always unplug tools before cleaning. Use a soft, dry cloth to wipe the
-  exterior and store in a dry place.
+  Get your API keys from the Developer section of your AlphaPay dashboard. Always use test-mode keys during development.
 </Aside>
 
-Regular maintenance ensures longevity and safety. Clean your tools after each use, check for wear, and lubricate moving parts as specified in the tool's manual.
+To initiate a transfer via the API, send a POST request to our transfers endpoint:
+
+```bash
+curl -X POST https://api.alphapay.africa/v1/transfers \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 500,
+    "currency": "GHS",
+    "recipient_phone": "+233241234567",
+    "network": "mtn",
+    "description": "Salary payment"
+  }'
+```
 
 ## Additional Resources
 
 <LinkCard
-  title="In-depth Tutorials"
-  description="Deep dive into using our tools with expert-led tutorials."
-  href="/guides/getting-started"
+  title="Transfers & Payments API Reference"
+  description="Full API documentation for initiating transfers, collecting payments, and managing wallets."
+  href="/guides/intro"
 />
 
 <LinkCard
-  title="Video Demos"
-  description="Visual guides to get the most out of your tools."
-  href="/guides/getting-started"
+  title="Webhook Setup Guide"
+  description="Configure real-time event notifications for your application."
+  href="/guides/first-project-checklist"
 />
 
 <LinkCard
-  title="Warranty Information"
-  description="Understand your coverage and how to make a claim if needed."
-  href="/guides/getting-started"
+  title="Advanced Topics"
+  description="Bulk disbursements, FX handling, AML compliance, and production deployment guides."
+  href="/advanced/technical-specifications"
 />

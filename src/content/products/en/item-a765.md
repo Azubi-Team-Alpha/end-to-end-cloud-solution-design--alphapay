@@ -1,53 +1,53 @@
 ---
-title: 'SF-AB A765'
-description: 'Assorted Screw Set'
+title: 'AlphaPay Virtual Card'
+description: 'Spend globally with a virtual Visa card'
 main:
   id: 2
   content: |
-    Introducing the SF-AB A765 Assorted Screw Set – the ultimate solution for your screw fastening needs. This comprehensive set includes a wide variety of screws meticulously curated to tackle various projects with ease and precision.
+    The AlphaPay Virtual Visa Card lets you shop online, subscribe to global platforms, and pay in USD — all funded directly from your GHS, NGN, or KES wallet. Generate your card instantly from the app with no physical card required.
   imgCard: '@/images/product-image-2.avif'
   imgMain: '@/images/product-image-main-2.avif'
-  imgAlt: 'Mockup boxes of assorted screw set'
+  imgAlt: 'AlphaPay Virtual Visa Card displayed on mobile dashboard'
 tabs:
   - id: 'tabs-with-card-item-1'
     dataTab: '#tabs-with-card-1'
     title: 'Description'
   - id: 'tabs-with-card-item-2'
     dataTab: '#tabs-with-card-2'
-    title: 'Specifications'
+    title: 'Features'
   - id: 'tabs-with-card-item-3'
     dataTab: '#tabs-with-card-3'
-    title: 'Blueprints'
+    title: 'Supported Networks'
 longDescription:
-  title: 'Versatile Screw Fastening Solutions'
+  title: 'Go Global Without Leaving Home'
   subTitle: |
-    The SF-AB A765 Assorted Screw Set offers unmatched versatility and convenience, making it the perfect choice for DIY enthusiasts and professionals alike. With a comprehensive selection of screws, you'll always have the right fastener for the job.
-  btnTitle: 'Contact sales to learn more'
+    The AlphaPay Virtual Card bridges the gap between African wallets and global commerce. Pay for Netflix, Spotify, AWS, Google Ads, and thousands of international merchants — all in USD, billed directly to your local wallet with transparent exchange rates shown upfront.
+  btnTitle: 'Get your virtual card'
   btnURL: '#'
 descriptionList:
-  - title: 'Wide Variety'
-    subTitle: 'Includes a diverse range of screw types and sizes to accommodate various applications and materials.'
-  - title: 'Ease of Use'
-    subTitle: 'Each screw is designed for effortless installation, ensuring hassle-free fastening every time.'
-  - title: 'Convenience'
-    subTitle: 'Eliminates the need for multiple trips to the hardware store, saving time and effort on your projects.'
+  - title: 'Instant Card Generation'
+    subTitle: 'Create a new virtual Visa card from your AlphaPay dashboard in under 60 seconds — no paperwork, no waiting.'
+  - title: 'Global Acceptance'
+    subTitle: 'Accepted anywhere Visa is accepted online, including all major international e-commerce and subscription platforms.'
+  - title: 'Full Spending Control'
+    subTitle: 'Set spending limits, freeze or unfreeze your card, and receive real-time push notifications for every transaction.'
 specificationsLeft:
-  - title: 'Material'
-    subTitle: 'Constructed from high-quality materials such as stainless steel, ensuring durability and corrosion resistance.'
-  - title: 'Assortment'
-    subTitle: 'Contains a generous assortment of screws, including wood screws, machine screws, and sheet metal screws.'
-  - title: 'Quantity'
-    subTitle: 'Each set includes a sufficient quantity of screws to handle a wide range of projects and tasks.'
-  - title: 'Sizes'
-    subTitle: 'Available in various sizes to suit different project requirements, ensuring compatibility and versatility.'
+  - title: 'Card Type'
+    subTitle: 'Visa Virtual Card — internationally accepted for online payments.'
+  - title: 'Currency'
+    subTitle: 'USD-denominated card funded by your local currency wallet at live mid-market rates.'
+  - title: 'Card Issuance'
+    subTitle: 'Instant digital delivery — available immediately from your app dashboard.'
+  - title: 'Card Limit'
+    subTitle: 'Up to $500 per transaction; up to $2,000 per month for verified accounts.'
 tableData:
-  - feature: ['Specification', 'Value']
+  - feature: ['Feature', 'Details']
     description:
-      - ['Length (mm)', 'Various']
-      - ['Weight (g)', 'N/A']
-      - ['Material', 'Stainless Steel']
-      - ['Finish', 'Assorted']
-      - ['Package Contents', 'Various screws in a set']
+      - ['Card Network', 'Visa']
+      - ['Currency', 'USD']
+      - ['Issuance Time', 'Instant (<60 seconds)']
+      - ['Monthly Fee', 'Free']
+      - ['Supported Uses', 'Online shopping, subscriptions, SaaS']
 blueprints:
   first: '@/images/blueprint-1.avif'
   second: '@/images/blueprint-2.avif'

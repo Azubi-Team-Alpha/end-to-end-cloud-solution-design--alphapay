@@ -1,42 +1,72 @@
 ---
-title: Equipment Care & Maintenance
-description: Explore AlphaPay's comprehensive documentation for an in-depth look at our premium tools and construction services. 
+title: Webhooks & Events
+description: Set up real-time webhook notifications for AlphaPay payment and transfer events.
 sidebar:
-  label: Equipment Care
+  label: Webhooks & Events
   order: 2
 ---
+import { Steps, Aside } from "@astrojs/starlight/components";
 
-import {
-  Card,
-  CardGrid,
-  LinkCard,
-  Aside
-} from "@astrojs/starlight/components";
+AlphaPay sends webhook events to your registered endpoint URL whenever a notable transaction event occurs. This allows your application to react in real time without polling.
 
-<Card title="Maintaining Your AlphaPay Tools" icon="approve-check-circle">
-<LinkCard
-  description="Step-by-step guide for the routine care and maintenance of your AlphaPay tools to ensure long-lasting functionality."
-  href="/guides/getting-started"
-/>
-<LinkCard
-  description="Cleaning, storage, and inspection practices to keep tools in optimal condition"
-  href="/guides/getting-started"
-/>
-</Card>
+## Supported Events
 
-<CardGrid>
-<Card title="Best Practices for Equipment Longevity" icon="star">
+| Event | Description |
+|---|---|
+| `transfer.success` | A transfer was successfully delivered to the recipient |
+| `transfer.failed` | A transfer failed — check `failure_reason` in payload |
+| `payment.received` | A customer payment was successfully collected |
+| `payment.failed` | A payment collection attempt failed |
+| `transaction.flagged` | A transaction was flagged for AML review |
+| `wallet.funded` | A wallet top-up was successfully completed |
+| `card.transaction` | A virtual card transaction was authorized |
 
-   - Strategies for extending the life of your tools and equipment through proper use and handling
-   - A preventative maintenance schedule that will help avoid common wear and tear
-</Card>
-<Card title="Troubleshooting Common Tool Issues" icon="rocket">
+## Webhook Payload Format
 
-   - Solutions for frequently encountered issues with AlphaPay equipment
-   - Advice on when to seek professional repair services versus performing DIY fixes
-</Card>
-</CardGrid>
+```json
+{
+  "event": "transfer.success",
+  "transfer_id": "txn_GH_20240715_a8f3c",
+  "amount": 500,
+  "currency": "GHS",
+  "recipient_phone": "+233241234567",
+  "network": "mtn",
+  "timestamp": "2024-07-15T10:24:02Z",
+  "signature": "sha256=abc123..."
+}
+```
 
-<Aside>
-Remember that attentiveness to the condition and care of your tools and equipment is paramount to ensuring their longevity and reliability. Regular maintenance not only helps prevent downtime but can also ensure the safety of those who use them. For each guide and reference listed here, we offer additional support through our customer service channels should you require personalized assistance.
+## Setting Up Webhooks
+
+<Steps>
+1. Go to **Dashboard → Developer → Webhooks** and click **Add Endpoint**
+
+2. Enter your publicly accessible HTTPS endpoint URL
+
+3. Select the events you want to receive and save
+
+4. Copy the **Webhook Secret** shown after saving — you'll use this to verify signatures
+
+</Steps>
+
+## Verifying Webhook Signatures
+
+<Aside type="caution">
+  Always verify the webhook signature before processing any event. Unverified webhooks are a security risk.
 </Aside>
+
+```javascript
+const crypto = require('crypto');
+
+function verifyWebhook(payload, signature, secret) {
+  const hmac = crypto
+    .createHmac('sha256', secret)
+    .update(JSON.stringify(payload))
+    .digest('hex');
+  return `sha256=${hmac}` === signature;
+}
+```
+
+## Retry Behaviour
+
+If your endpoint returns a non-2xx response or times out (>30s), AlphaPay will retry the webhook up to **5 times** with exponential backoff: 5s, 30s, 5min, 30min, 2h.

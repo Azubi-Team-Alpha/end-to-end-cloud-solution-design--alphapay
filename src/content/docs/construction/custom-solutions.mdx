@@ -1,19 +1,55 @@
 ---
-title: Custom Solutions for Complex Projects
-description: Explore AlphaPay's comprehensive documentation for an in-depth look at our premium tools and construction services.
+title: SDKs & Custom Integrations
+description: AlphaPay SDKs, no-code integrations, and custom enterprise solutions.
 sidebar:
-  label: Custom Solutions
+  label: SDKs & Custom Integrations
   order: 4
 ---
+import { LinkCard, CardGrid, Aside } from "@astrojs/starlight/components";
 
-import { Card } from '@astrojs/starlight/components';
+AlphaPay provides official SDKs and integration libraries to help you integrate faster, with less boilerplate.
 
-Challenging projects demand innovative solutions. AlphaPay excels in delivering custom solutions engineered to address the most intricate and demanding construction requirements.
+## Official SDKs
 
-<Card title="Our custom services provide:" icon="puzzle">
-  - Expert analysis of unconventional project demands - Tailored construction
-  methods for unique structures - Specialized materials and equipment sourcing -
-  Collaboration with specialized subcontractors and consultants
-</Card>
+<CardGrid>
+  <LinkCard title="Node.js SDK" description="npm install alphapay-node" href="#" />
+  <LinkCard title="Python SDK" description="pip install alphapay-python" href="#" />
+  <LinkCard title="PHP SDK" description="composer require alphapay/php-sdk" href="#" />
+</CardGrid>
 
-No matter the complexity, our bespoke services ensure that your specialized project is not just completed, but mastered.
+### Node.js Quick Example
+
+```javascript
+const AlphaPay = require('alphapay-node');
+const client = new AlphaPay(process.env.ALPHAPAY_SECRET_KEY);
+
+const transfer = await client.transfers.create({
+  amount: 500,
+  currency: 'GHS',
+  recipient_phone: '+233241234567',
+  network: 'mtn',
+  description: 'Invoice payment',
+});
+console.log(transfer.transfer_id);
+```
+
+## No-Code Integrations
+
+For teams that prefer no-code or low-code solutions:
+
+- **WooCommerce Plugin** — Accept payments on your WordPress store
+- **Shopify App** — Listed in the Shopify App Store
+- **Zapier Integration** — Trigger AlphaPay transfers from 5,000+ apps
+- **Google Sheets Add-on** — Bulk payroll from a spreadsheet
+
+## Enterprise & Custom Integrations
+
+<Aside type="tip">
+  For custom enterprise requirements — white-labelling, dedicated infrastructure, or custom FX agreements — contact our enterprise sales team at enterprise@alphapay.africa
+</Aside>
+
+Enterprise integrations include:
+- Dedicated API rate limits and SLA guarantees
+- Custom webhook event schemas
+- Direct settlement accounts in multiple currencies
+- On-site integration support from the AlphaPay engineering team

@@ -1,31 +1,70 @@
 ---
-title: Tool Guides
-description: Explore AlphaPay's comprehensive documentation for an in-depth look at our premium tools and construction services.
+title: Transfers & Payments API
+description: Complete reference for AlphaPay's Transfers and Payments API endpoints.
 sidebar:
-  label: Tool Guides
+  label: Transfers API
   order: 1
 ---
+import { Steps, Aside } from "@astrojs/starlight/components";
 
-AlphaPay prides itself on a comprehensive range of high-grade tools and equipment. These resources are not just about delivering the performance you expect but ensuring they stand the test of time. Below, you will find a curated selection of guides geared towards helping you get the most out of our products.
+The AlphaPay Transfers API allows you to initiate instant money transfers to any bank account or mobile money wallet across 15+ African countries.
 
-### Tool Guides
+## Initiate a Transfer
 
-**Machine Screws Manual**
+**POST** `/v1/transfers`
 
-- Detailed specifications and applications for AlphaPay's variety of machine screws
-- Visual guide for identifying screw types and choosing the right one for your project
+```bash
+curl -X POST https://api.alphapay.africa/v1/transfers \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 500,
+    "currency": "GHS",
+    "recipient_phone": "+233241234567",
+    "network": "mtn",
+    "description": "Invoice payment #1042"
+  }'
+```
 
-**Assorted Screw Set Handbook**
+### Request Body
 
-- Instructions on usage and selection from the assorted screw set
-- Tips on organizing and storing your screw set for easy access
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `amount` | number | ✅ | Transfer amount in the source currency |
+| `currency` | string | ✅ | ISO 4217 currency code (e.g., `GHS`, `NGN`, `KES`) |
+| `recipient_phone` | string | ✅ | Recipient's phone number in E.164 format |
+| `network` | string | ✅ | Mobile network (`mtn`, `telecel`, `airteltigo`, `mpesa`, `orange`) |
+| `description` | string | ❌ | Optional description shown in transaction history |
+| `reference` | string | ❌ | Your unique idempotency reference (prevents duplicate transfers) |
 
-**Tap Bolts and Nuts Catalog**
+### Response
 
-- Exploring the diverse range of tap bolts and nuts suitable for various construction environments
-- Guidelines for selecting the correct bolt size and nut pairing for secure fastening
+```json
+{
+  "status": "success",
+  "transfer_id": "txn_GH_20240715_a8f3c",
+  "amount": 500,
+  "currency": "GHS",
+  "recipient_phone": "+233241234567",
+  "network": "mtn",
+  "created_at": "2024-07-15T10:24:00Z",
+  "settlement_status": "completed"
+}
+```
 
-**Hex Bolts Instructions**
+## Check Transfer Status
 
-- Comprehensive procedures on the use of hex bolts in your projects
-- Strength ratings, threading information, and torque recommendations
+**GET** `/v1/transfers/{transfer_id}`
+
+<Aside type="tip">
+  Listen for `transfer.success` and `transfer.failed` webhook events instead of polling for better performance.
+</Aside>
+
+## Error Codes
+
+| Code | Description |
+|---|---|
+| `INSUFFICIENT_FUNDS` | Sender wallet balance is too low |
+| `INVALID_RECIPIENT` | Phone number not registered on the specified network |
+| `TRANSFER_LIMIT_EXCEEDED` | Amount exceeds your account's per-transaction limit |
+| `NETWORK_UNAVAILABLE` | Mobile network temporarily unavailable — retry in 30s |

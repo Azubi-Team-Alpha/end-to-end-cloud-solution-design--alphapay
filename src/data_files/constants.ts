@@ -7,7 +7,7 @@ export const SITE = {
     'Send, receive, and manage money instantly. Zero fees on local transfers. Built for Africans, trusted worldwide.',
   description_short:
     'Move money freely across Africa and beyond. Send, receive, and manage money instantly.',
-  url: '#!',
+  url: 'https://alphapay.africa',
   author: 'Team Alpha',
 };
 
@@ -15,12 +15,12 @@ export const SEO = {
   title: SITE.title,
   description: SITE.description,
   structuredData: {
-    '@context': '#!',
-    '@type': '#!',
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
     inLanguage: 'en-US',
-    '@id': '#!',
-    url: '#!',
-    name: '#!',
+    '@id': 'https://alphapay.africa',
+    url: 'https://alphapay.africa',
+    name: SITE.title,
     description: SITE.description,
     isPartOf: {
       '@type': 'WebSite',
@@ -34,7 +34,7 @@ export const SEO = {
 export const OG = {
   locale: 'en_US',
   type: 'website',
-  url: SITE.url,
+  url: 'https://alphapay.africa',
   title: `${SITE.title}: Move Money Freely Across Africa`,
   description:
     "Send, receive, and manage money instantly with AlphaPay. Zero fees on local transfers. Built for Africans, trusted worldwide. Fully deployed via robust cloud infrastructure by Team Alpha.",

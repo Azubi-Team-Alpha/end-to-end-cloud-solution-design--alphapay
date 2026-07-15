@@ -1,31 +1,58 @@
 ---
-title: Safety Protocols and Procedures
-description: Explore AlphaPay's comprehensive documentation for an in-depth look at our premium tools and construction services.
+title: Security & Compliance
+description: AlphaPay's security architecture, AML compliance framework, and KYC tier requirements.
 sidebar:
-  label: Safety Protocols
+  label: Security & Compliance
   order: 3
 ---
+import { Card, CardGrid, Aside } from "@astrojs/starlight/components";
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+AlphaPay is built on bank-grade security principles and is fully compliant with the regulatory requirements of all countries where we operate.
 
-Safety is at the core of everything we do at AlphaPay. Our comprehensive safety protocols and procedures are designed to protect our team, clients, and the integrity of your project.
-
-<Card title="Key features of our safety commitment include:"></Card>
-
-<LinkCard
-  title="Rigorous safety training for all personnel"
-  href="/guides/getting-started"
-/>
+## Security Architecture
 
 <CardGrid>
-  <LinkCard
-    title="Regular safety audits and compliance checks"
-    href="/guides/getting-started"
-  />
-  <LinkCard
-    title="Emergency response plans and drills"
-    href="/guides/getting-started"
-  />
+  <Card title="256-bit SSL Encryption" icon="star">
+    All data in transit is encrypted with TLS 1.3. API connections require HTTPS — plain HTTP is rejected.
+  </Card>
+  <Card title="Two-Factor Authentication" icon="star">
+    All user accounts require 2FA (SMS OTP or authenticator app) for login and high-value transaction confirmation.
+  </Card>
+  <Card title="Real-time Fraud Detection" icon="star">
+    Every transaction is screened in real time by our ML-based fraud engine before processing.
+  </Card>
+  <Card title="AWS Security Infrastructure" icon="star">
+    Deployed on AWS EC2 behind an Application Load Balancer with ACM SSL, CloudFront CDN, and IAM least-privilege roles.
+  </Card>
 </CardGrid>
 
-By integrating safety into our daily operations, we create a secure working environment without compromising on quality and productivity.
+## KYC Tiers
+
+| Tier | Requirements | Transaction Limit |
+|---|---|---|
+| Tier 0 (Unverified) | Phone number only | GH₵ 1,000/day |
+| Tier 1 (Basic KYC) | National ID or passport | GH₵ 5,000/day |
+| Tier 2 (Full KYC) | ID + selfie + proof of address | GH₵ 50,000/day |
+| Business KYC | RC cert + directors ID + bank statement | Unlimited (negotiated) |
+
+## AML Compliance
+
+AlphaPay implements the following AML controls on all transactions:
+
+- **Sanctions screening** — all sender/recipient names and phone numbers are screened against OFAC, UN, and local watchlists
+- **Transaction monitoring** — automated rules flag suspicious patterns (rapid small transfers, round-number structuring, high-velocity transfers)
+- **SAR filing** — Suspicious Activity Reports are filed with the relevant financial intelligence unit as required by law
+
+<Aside type="caution">
+  If a transaction is flagged (`transaction.flagged` webhook event), do not retry it. Contact your AlphaPay compliance team for guidance.
+</Aside>
+
+## Regulatory Licences
+
+| Country | Regulator | Status |
+|---|---|---|
+| Ghana | Bank of Ghana (BoG) | Licensed |
+| Nigeria | Central Bank of Nigeria (CBN) | Licensed |
+| Kenya | Central Bank of Kenya (CBK) | Licensed |
+| Uganda | Bank of Uganda (BoU) | Licensed |
+| Rwanda | National Bank of Rwanda (BNR) | Licensed |

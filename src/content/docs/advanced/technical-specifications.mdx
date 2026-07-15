@@ -1,8 +1,8 @@
 ---
-title: Technical Specifications
-description: Explore AlphaPay's comprehensive documentation for an in-depth look at our premium tools and construction services. 
+title: Advanced Topics
+description: Deep dives into bulk disbursements, FX handling, AML compliance, and AlphaPay's AWS cloud infrastructure.
 sidebar:
-  label: Technical Specifications
+  label: Advanced Topics
   order: 1
 ---
 import {
@@ -12,44 +12,63 @@ import {
   Steps
 } from "@astrojs/starlight/components";
 
-Dive deep into the technicalities of our product offerings with AlphaPay's comprehensive technical specifications documentation. Our detailed data sheets provide you with all the information you need on:
+This section covers advanced integration patterns, compliance requirements, and technical architecture details for teams building production-grade applications on AlphaPay's infrastructure.
 
 <CardGrid>
-  <Card title="Material properties and grades" icon="star"></Card>
-  <Card title="Mechanical strengths and tolerances" icon="star"></Card>
-  <Card title="Environmental resilience and sustainability ratings" icon="star"></Card>
-  <Card title="Compatibility and interoperability" icon="star"></Card>
+  <Card title="Bulk Disbursements" icon="star">Optimize large-scale payroll and batch payment flows</Card>
+  <Card title="FX & Currency Handling" icon="star">Multi-currency wallets and real-time exchange rate management</Card>
+  <Card title="AML Compliance" icon="star">Transaction monitoring, KYC levels, and regulatory reporting</Card>
+  <Card title="AWS Cloud Architecture" icon="star">AlphaPay's infrastructure: EC2, ALB, CloudFront, and IAM design</Card>
 </CardGrid>
 
-Understanding these specifications will help you select and use our products with confidence, ensuring optimal performance and longevity.
+## Bulk Disbursement Optimization
+
+For high-volume payroll or mass payout use cases, use the `/v1/bulk-transfers` endpoint to submit up to 1,000 recipients in a single API call.
 
 <Steps>
-1. **Material Specifications**  
-Insight into the materials used and their properties to assist you with informed decision-making.
+1. **Prepare the recipient list**
+   Build a JSON array of recipient objects with `phone`, `amount`, `currency`, and `network` fields. Validate all phone numbers before submission.
 
-2. **Performance Metrics**  
-Documented performance metrics that detail what you can expect from our products under various conditions.
+2. **Submit the bulk transfer**
+   POST the recipient array to `/v1/bulk-transfers`. The API returns a `batch_id` immediately — processing happens asynchronously.
 
-3. **Compliance Standards**  
-Information about industry standards and regulatory compliance ensures your project adheres to necessary codes and practices.
+3. **Monitor batch progress**
+   Poll `GET /v1/bulk-transfers/{batch_id}` or listen for `transfer.success` and `transfer.failed` webhook events per recipient.
+
+4. **Handle partial failures**
+   The API returns a per-recipient status. Retry only the failed recipients using the `retry_batch` endpoint — successful recipients are not re-processed.
 </Steps>
 
-## Product Integration Techniques
+## FX & Multi-Currency Handling
 
-Unlock the full potential of AlphaPay products with our set of specialized integration techniques. 
+AlphaPay supports wallets in GHS, NGN, KES, UGX, RWF, and USD. When initiating a cross-border transfer:
 
-Leverage our in-depth knowledge to enhance the efficiency and durability of your constructions by correctly incorporating our products.
+- Exchange rates are locked at the time of transfer initiation
+- The sender sees the exact destination amount before confirming
+- FX rates are sourced in real-time and updated every 60 seconds
+- Use `GET /v1/fx-rates?from=GHS&to=NGN` to fetch the current rate before presenting it to users
 
-## Advanced Use Cases
+## AML & Compliance Integration
 
-Explore the possibilities with AlphaPay through real-world scenarios. Our catalog of advanced use cases demonstrates how our products can solve complex challenges and push the boundaries of conventional construction.
+AlphaPay performs automated AML screening on every transaction. Your integration should:
 
-See how AlphaPay products have been instrumental in:
+<Steps>
+1. Collect and submit accurate sender and recipient information — incomplete data causes transaction delays
+
+2. Implement the webhook handler for `transaction.flagged` events — flagged transactions require manual review before release
+
+3. For business accounts processing > $50,000/month equivalent, contact your account manager for enhanced due diligence (EDD) onboarding
+
+</Steps>
+
+## AWS Cloud Architecture
+
+AlphaPay is deployed on a highly available AWS infrastructure built by Team Alpha:
 
 <CardGrid>
-  <LinkCard title="Major infrastructure projects" href="/guides/getting-started" />
-  <LinkCard title="Innovative architectural accomplishments" href="/guides/getting-started" />
-  <LinkCard title="High-stress industrial applications" href="/guides/getting-started" />
+  <LinkCard title="EC2 + Application Load Balancer" href="/guides/getting-started" />
+  <LinkCard title="CloudFront CDN Distribution" href="/guides/getting-started" />
+  <LinkCard title="ACM SSL Certificate Management" href="/guides/getting-started" />
 </CardGrid>
 
-These case studies serve as an inspiration and a learning tool, showcasing what can be achieved with the right expertise and AlphaPay's superior product range.
+The infrastructure is provisioned entirely via **Terraform** and deployed via **GitHub Actions CI/CD**, ensuring reproducible, version-controlled infrastructure as code. IAM roles follow the principle of least privilege, and S3 bucket access is restricted via Origin Access Control (OAC) for CloudFront.

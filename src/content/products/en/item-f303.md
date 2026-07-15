@@ -1,54 +1,54 @@
 ---
-title: 'SF-FN F303'
-description: 'Hex Bolts'
+title: 'AlphaPay Cross-Border Transfer'
+description: 'Send money across 15+ African countries instantly'
 main:
   id: 4
   content: |
-    Introducing the SF-FN F303 Hex Bolts – the perfect choice for heavy-duty fastening applications. Crafted with precision and durability in mind, these hex bolts provide the strength and reliability you need for your toughest projects.
+    AlphaPay Cross-Border Transfer enables instant, low-cost international money transfers across 15+ African countries. Powered by a real-time FX engine and direct integrations with major mobile money networks and commercial banks, your money arrives in under 2 seconds — regardless of borders.
   imgCard: '@/images/product-image-4.avif'
   imgMain: '@/images/product-image-main-4.avif'
-  imgAlt: 'Mockup boxes of hex bolts'
+  imgAlt: 'AlphaPay cross-border transfer flow showing Ghana to Nigeria money transfer'
 tabs:
   - id: 'tabs-with-card-item-1'
     dataTab: '#tabs-with-card-1'
     title: 'Description'
   - id: 'tabs-with-card-item-2'
     dataTab: '#tabs-with-card-2'
-    title: 'Specifications'
+    title: 'Features'
   - id: 'tabs-with-card-item-3'
     dataTab: '#tabs-with-card-3'
-    title: 'Blueprints'
+    title: 'Supported Countries'
 longDescription:
-  title: 'Heavy-Duty Fastening Solutions'
+  title: "Borders Shouldn't Slow Down Money"
   subTitle: |
-    The SF-FN F303 Hex Bolts are designed to handle the toughest fastening challenges with ease. Whether you're working on construction projects or heavy machinery, these hex bolts deliver the strength and reliability you need.
-  btnTitle: 'Contact sales to learn more'
+    AlphaPay Cross-Border Transfer eliminates the friction of traditional international remittances. No SWIFT codes, no 3-5 day delays, no excessive fees. Just enter the recipient's phone number or account number and your money moves instantly across Africa at the best available exchange rates.
+  btnTitle: 'Send money across Africa'
   btnURL: '#'
 descriptionList:
-  - title: 'Strength and Durability'
-    subTitle: 'Constructed from high-quality materials, these hex bolts are built to withstand heavy loads and tough conditions.'
-  - title: 'Precision Engineering'
-    subTitle: 'Engineered with precision-cut threads and exact specifications, ensuring a tight and secure fit every time.'
-  - title: 'Versatility'
-    subTitle: 'Suitable for a wide range of applications, from construction to machinery, providing versatile fastening solutions.'
+  - title: 'Best-in-Market Exchange Rates'
+    subTitle: 'We use real-time mid-market FX rates with minimal transparent fees shown before you confirm — no hidden spreads.'
+  - title: 'Instant Cross-Border Settlement'
+    subTitle: 'Transfers complete in under 2 seconds across supported corridors — Ghana, Nigeria, Kenya, Uganda, Rwanda, and more.'
+  - title: 'Multiple Payout Methods'
+    subTitle: "Deliver funds to bank accounts, mobile money wallets, or cash pickup points in the recipient's country."
 specificationsLeft:
-  - title: 'Material'
-    subTitle: 'Made from premium-grade steel or alloy, offering exceptional strength and corrosion resistance.'
-  - title: 'Thread Design'
-    subTitle: 'Precision-cut threads ensure optimal grip and reliability, even in high-stress environments.'
-  - title: 'Quantity'
-    subTitle: 'Each set includes a sufficient quantity of hex bolts to tackle various projects and applications.'
-  - title: 'Sizes'
-    subTitle: 'Available in a range of sizes to accommodate different project requirements, ensuring versatility and compatibility.'
+  - title: 'Transfer Speed'
+    subTitle: 'Under 2 seconds for all supported corridors, 24/7 including weekends and public holidays.'
+  - title: 'Supported Countries'
+    subTitle: "Ghana, Nigeria, Kenya, Uganda, Rwanda, South Africa, Tanzania, Senegal, Cote d'Ivoire, and 6+ more."
+  - title: 'FX Rate Type'
+    subTitle: 'Real-time mid-market exchange rates updated every 60 seconds for maximum transparency.'
+  - title: 'Transfer Limit'
+    subTitle: 'Up to the equivalent of $5,000 USD per transaction for fully verified accounts.'
 specificationsRight:
-  - title: 'Finish'
-    subTitle: 'Finished with a protective coating to enhance corrosion resistance and extend service life.'
-  - title: 'Load Capacity'
-    subTitle: 'Designed to meet or exceed industry standards for load-bearing capacity, ensuring reliable performance under heavy loads.'
-  - title: 'Certifications'
-    subTitle: 'Compliant with relevant industry standards and certifications, guaranteeing quality and reliability.'
-  - title: 'Applications'
-    subTitle: 'Ideal for use in construction, machinery, automotive, and other heavy-duty applications that demand strong and reliable fastening.'
+  - title: 'Payout Options'
+    subTitle: 'Bank deposit, mobile money (MTN, M-Pesa, Orange Money, Telecel, AirtelTigo), and agent cash pickup.'
+  - title: 'Regulatory Compliance'
+    subTitle: 'Licensed and compliant with all central bank regulations across supported corridors.'
+  - title: 'Transaction Monitoring'
+    subTitle: 'Real-time AML screening and fraud detection on every cross-border transaction.'
+  - title: 'Recipient Notification'
+    subTitle: 'Automatic SMS and push notification to recipient upon successful credit in their local currency.'
 blueprints:
   first: '@/images/blueprint-1.avif'
   second: '@/images/blueprint-2.avif'

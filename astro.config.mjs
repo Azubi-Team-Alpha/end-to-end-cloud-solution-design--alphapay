@@ -59,14 +59,14 @@ export default defineConfig({
           items: [{ autogenerate: { directory: 'guides' } }],
         },
         {
-          label: 'Tools & Equipment',
+          label: 'Transfers & Payments API',
           items: [
-            { label: 'Tool Guides', link: 'tools/tool-guides/' },
-            { label: 'Equipment Care', link: 'tools/equipment-care/' },
+            { label: 'Transfers API', link: 'tools/tool-guides/' },
+            { label: 'Webhooks & Events', link: 'tools/equipment-care/' },
           ],
         },
         {
-          label: 'Construction Services',
+          label: 'Collections & Integrations',
           items: [{ autogenerate: { directory: 'construction' } }],
         },
         {
