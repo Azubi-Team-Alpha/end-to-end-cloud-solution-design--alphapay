@@ -23,48 +23,42 @@ const product: CollectionEntry<'products'>[] = (
 );
 
 // Define variables for page content
-const title: string = 'Products';
+const title: string = 'Our Products';
 const subTitle: string =
-  'Explore the durability and precision of ScrewFast tools, designed for both professionals and enthusiasts. Each of our products is crafted with precision and built to last, ensuring you have the right tool for every job.';
+  'Explore AlphaPay\'s full suite of financial products — from personal wallets and virtual Visa cards to business payment APIs and cross-border transfer infrastructure. Every product is built for speed, security, and the African market.';
 
 // Testimonial data that will be rendered in the component
 const testimonials = [
-  // First testimonial data
   {
     content:
-      ' "Since switching to ScrewFast\'s hardware tools, the efficiency on our construction sites has skyrocketed. The durability of the hex bolts and precision of the machine screws are simply unmatched. It\'s refreshing to work with a company that truly understands the daily demands of the industry." ',
-    author: 'Jason Clark',
-    role: 'Site Foreman | TopBuild',
-    avatarSrc:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
-    avatarAlt: 'Image Description',
+      '"AlphaPay\'s virtual card changed the way I shop online. I can now pay for international subscriptions in USD directly from my GHS wallet with zero complications. The setup took under a minute."',
+    author: 'Akosua Mensah',
+    role: 'Freelance Designer | Accra, Ghana',
+    avatarSrc: 'https://i.pravatar.cc/320?img=47',
+    avatarAlt: 'Akosua Mensah avatar',
   },
-  // Second testimonial data
   {
     content:
-      ' "As an interior designer, I\'m always looking for high-quality materials and tools that help bring my visions to life. ScrewFast\'s mixed screws assortment has been a game-changer for my projects, providing the perfect blend of quality and variety. The outstanding customer support was just the cherry on top!" ',
-    author: 'Maria Gonzalez',
-    role: 'Interior Designer | Creative Spaces',
-    avatarSrc:
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
-    avatarAlt: 'Image Description',
+      '"We switched our payroll to AlphaPay and went from a 3-day process to same-day disbursement for all 85 staff. The bulk payment API was straightforward to integrate and the webhook notifications are reliable."',
+    author: 'Emeka Okafor',
+    role: 'CFO | GreenLeaf Agribusiness, Lagos',
+    avatarSrc: 'https://i.pravatar.cc/320?img=12',
+    avatarAlt: 'Emeka Okafor avatar',
   },
-  // Third testimonial data
   {
     content:
-      " \"I've been a professional carpenter for over 15 years, and I can sincerely say that ScrewFast's tap bolts and nuts are some of the best I've used. They grip like no other, and I have full confidence in every joint and fixture. Plus, the service is impeccable – they truly care about my project's success.\" ",
-    author: 'Richard Kim',
-    role: 'Master Carpenter | WoodWright',
-    avatarSrc:
-      'https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
-    avatarAlt: 'Image Description',
+      '"Cross-border transfers to our Kenya office used to take 3-5 days and cost a fortune in fees. With AlphaPay, funds arrive in under 2 seconds and the exchange rates are the best we\'ve found anywhere."',
+    author: 'Amina Wambua',
+    role: 'Operations Lead | PanAfrica Logistics, Nairobi',
+    avatarSrc: 'https://i.pravatar.cc/320?img=32',
+    avatarAlt: 'Amina Wambua avatar',
   },
 ];
 
 const pageTitle: string = `Products | ${SITE.title}`;
 const metaDescription =
-  'Explore the durability and precision of ScrewFast tools, designed for both professionals and enthusiasts.';
-const ogTitle = 'Hardware Tools | ScrewFast';
+  'Explore AlphaPay\'s product suite — personal wallets, virtual cards, business payment APIs, and cross-border transfer infrastructure built for Africa.';
+const ogTitle = 'AlphaPay Products | African Fintech Payment Suite';
 ---
 
 <MainLayout
@@ -76,15 +70,13 @@ const ogTitle = 'Hardware Tools | ScrewFast';
     '@type': 'WebPage',
     '@id': '#!',
     url: '#!',
-    name: 'Hardware Tools | ScrewFast',
-    description:
-      'Explore the durability and precision of ScrewFast tools, designed for both professionals and enthusiasts.',
+    name: 'AlphaPay Products | African Fintech Payment Suite',
+    description: metaDescription,
     isPartOf: {
       '@type': 'WebSite',
       url: '#!',
-      name: 'ScrewFast',
-      description:
-        'ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs.',
+      name: 'AlphaPay',
+      description: 'Send, receive, and manage money instantly across Africa.',
     },
     inLanguage: 'en-US',
   }}
@@ -128,17 +120,17 @@ const ogTitle = 'Hardware Tools | ScrewFast';
   </div>
   {/* Features statistics section */}
   <FeaturesStatsAlt
-    title="Why Choose ScrewFast?"
-    subTitle="Transform your ideas into tangible results with ScrewFast tools. Whether you're starting with a sketch on a napkin or diving into a comprehensive construction project, our tools are engineered to help you build with confidence."
+    title="Why Choose AlphaPay?"
+    subTitle="Whether you're an individual sending money home, a freelancer getting paid internationally, or a business running bulk payroll — AlphaPay has a product built for your exact need."
     benefits={[
-      'Robust and reliable tools for long-lasting performance.',
-      'Innovative solutions tailored to modern construction needs.',
-      "Customer support dedicated to your project's success.",
+      'Zero fees on local transfers — keep more of your money.',
+      'Instant settlement to banks and mobile wallets across 15+ African countries.',
+      'Enterprise-grade AWS security with 99.99% uptime guarantee.',
     ]}
   />
   {/* Testimonials section */}
   <TestimonialsSectionAlt
-    title="What Our Customers Say"
+    title="Trusted Across the Continent"
     testimonials={testimonials}
   />
 </MainLayout>

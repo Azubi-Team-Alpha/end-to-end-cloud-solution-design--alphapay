@@ -7,14 +7,14 @@ import RightSection from '@components/ui/blocks/RightSection.astro';
 import FeaturesStats from '@components/sections/features/FeaturesStats.astro';
 
 // Import necessary images
-import blueprints from '@images/blueprints-image.avif';
+import onboarding from '@images/blueprints-image.avif';
 import personWorking from '@images/person-working.avif';
-import beforeAfter from '@images/before-after.avif';
-import constructionWorkers from '@images/construction-workers.avif';
-import aerialView from '@images/aerial-view.avif';
+import support from '@images/before-after.avif';
+import businessDash from '@images/construction-workers.avif';
+import compliance from '@images/aerial-view.avif';
 import usingTools from '@images/using-tools.avif';
 import progressBuilding from '@images/progress-building.avif';
-import underConstruction from '@images/under-construction.avif';
+import security from '@images/under-construction.avif';
 import { SITE } from '@data/constants';
 
 interface Article {
@@ -36,66 +36,68 @@ interface Article {
 const articles: Article[] = [
   {
     isRightSection: true,
-    title: 'Delivering Expert Guidance',
+    title: 'Fast & Simple Account Setup',
     subTitle:
-      'Embarking on a construction project can be overwhelming. With our professional consultation services, we guide you through every stage, ensuring you make informed decisions. Whether you are a DIY enthusiast or a skilled contractor, our experts are on hand to offer tailored advice on product selection, project scope, and compliance with local regulations.',
+      'Getting started with AlphaPay takes less than 5 minutes. Our guided onboarding walks you through KYC identity verification, wallet creation, and linking your bank account or mobile money number. Our team is available 24/7 to help individuals and businesses get fully set up and transacting on day one.',
     single: false,
-    imgOne: blueprints,
-    imgOneAlt: 'Blueprints and digital tablet with construction plans.',
+    imgOne: onboarding,
+    imgOneAlt: 'AlphaPay team helping a new user onboard with KYC verification on laptop.',
     imgTwo: personWorking,
-    imgTwoAlt: 'Person working in the office',
+    imgTwoAlt: 'Developer integrating the AlphaPay payment API on a dual-monitor setup.',
   },
   {
     isRightSection: false,
-    title: 'Transforming Designs into Reality',
+    title: '24/7 Customer Support',
     subTitle:
-      'Our skilled craftsmen bring precision and excellence to every construction project. From minor installations to substantial structural work, ScrewFast offers reliable construction services to turn your plans into tangible outcomes. We ensure the highest standards of safety and workmanship, utilizing top-quality tools and materials from our extensive inventory.',
-    img: beforeAfter,
-    imgAlt: 'Construction site before and after',
+      'Our dedicated support agents are available around the clock via live chat, email, and phone. Whether you have a stuck transfer, a billing question, or need help navigating a feature, our team in Accra is always ready to resolve your issue in under 2 hours — guaranteed.',
+    img: support,
+    imgAlt: 'Friendly AlphaPay customer support agent at modern call center in Accra.',
     btnExists: true,
-    btnTitle: 'Learn More',
+    btnTitle: 'Contact Support',
+    btnURL: '/contact',
+  },
+  {
+    isRightSection: true,
+    title: 'Business Payments & Payroll',
+    subTitle:
+      'AlphaPay for Business gives merchants and enterprises full control over their finances. Send bulk payroll disbursements to hundreds of employees in seconds, collect payments via our checkout API, and get deep analytics on your revenue, settlement times, and transaction success rates — all from one intuitive dashboard.',
+    single: false,
+    imgOne: businessDash,
+    imgOneAlt: 'African business owner reviewing payroll and analytics on tablet.',
+    imgTwo: compliance,
+    imgTwoAlt: 'African fintech AML and KYC regulatory compliance framework diagram.',
+  },
+  {
+    isRightSection: false,
+    title: 'Developer API & Integrations',
+    subTitle:
+      'Our RESTful Payment API lets developers integrate AlphaPay into any platform in hours, not weeks. Comprehensive documentation, sandbox environments, webhook support, and SDKs for popular frameworks are all available. Accept payments, initiate transfers, and query balances programmatically with full API key management from your dashboard.',
+    img: personWorking,
+    imgAlt: 'Developer working with the AlphaPay Payment Gateway API and webhook logs.',
+    btnExists: true,
+    btnTitle: 'View API Docs',
     btnURL: '#',
   },
   {
     isRightSection: true,
-    title: 'Navigating Projects with Professional Oversight',
+    title: 'Regulatory Compliance & Security',
     subTitle:
-      'Effective project management is at the heart of any successful build. ScrewFast provides thorough planning and robust management services that keep your project on time and within budget. Let us handle the complexities of workflow coordination, resource allocation, and stakeholder communication while you focus on your vision.',
+      'AlphaPay is fully compliant with the Bank of Ghana (BoG), the Central Bank of Nigeria (CBN), and other African regulatory bodies. We implement AML transaction monitoring, KYC identity verification, biometric authentication, and real-time fraud detection — all running on a highly available AWS infrastructure secured behind an Application Load Balancer with ACM SSL.',
     single: false,
-    imgOne: constructionWorkers,
-    imgOneAlt: 'Construction workers orchestrating a project',
-    imgTwo: aerialView,
-    imgTwoAlt: 'Aerial view of managed construction',
-  },
-  {
-    isRightSection: false,
-    title: 'Ensuring Long-lasting Performance',
-    subTitle:
-      "Our commitment to your project doesn't end at completion. ScrewFast offers ongoing maintenance and support services to ensure your construction's longevity and performance. From regular check-ups to emergency assistance, our responsive team is there to provide seamless support.",
-    img: usingTools,
-    imgAlt:
-      'Man in orange and black vest wearing white helmet holding yellow and black power tool',
-  },
-  {
-    isRightSection: true,
-    title: 'Crafting Bespoke Strategies for Unique Challenges',
-    subTitle:
-      'For our larger enterprise clients, ScrewFast offers custom solutions designed to meet specific industry challenges. By understanding your unique needs, we engineer tailored strategies aimed at optimizing your operations, enhancing efficiency, and driving your business forward.',
-    single: false,
-    imgOne: progressBuilding,
-    imgOneAlt: 'In progress building structure',
-    imgTwo: underConstruction,
-    imgTwoAlt: 'Brown and gray building under construction',
+    imgOne: compliance,
+    imgOneAlt: 'African fintech regulatory compliance shield with AML and KYC workflow.',
+    imgTwo: security,
+    imgTwoAlt: 'AWS cloud security infrastructure protecting AlphaPay transactions.',
     btnExists: true,
-    btnTitle: 'Read more',
+    btnTitle: 'Learn about security',
     btnURL: '#',
   },
 ];
 
 const pageTitle: string = `Services | ${SITE.title}`;
 const metaDescription =
-  'Uniting expertise with your vision, ScrewFast provides exceptional service and comprehensive solutions in the hardware and construction industry, from consultation to project completion.';
-const ogTitle = 'Expert Consultation Services | ScrewFast';
+  'AlphaPay offers fast onboarding, 24/7 support, business payroll, payment APIs, and full regulatory compliance across Africa.';
+const ogTitle = 'AlphaPay Services | African Fintech Payment Platform';
 ---
 
 <MainLayout
@@ -108,38 +110,23 @@ const ogTitle = 'Expert Consultation Services | ScrewFast';
     '@id': '#!',
     url: '#!',
     name: '#!',
-    description:
-      'Uniting expertise with your vision, ScrewFast provides exceptional service and comprehensive solutions in the hardware and construction industry, from consultation to project completion.',
+    description: metaDescription,
     isPartOf: {
       '@type': 'WebSite',
       url: '#!',
-      name: '#!',
-      description:
-        'ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs.',
+      name: 'AlphaPay',
+      description: SITE.description,
     },
     inLanguage: 'en-US',
   }}
 >
-  {
-    /* MainSection is the introductory section of the page, it also contains a CTA button */
-  }
   <MainSection
-    title="Uniting Expertise with Your Vision"
-    subTitle="At ScrewFast, we take pride in providing comprehensive solutions and exceptional service in the hardware and construction industry. Our experienced team is dedicated to supporting your project from inception to completion with a range of specialized services."
+    title="Everything You Need to Move Money"
+    subTitle="AlphaPay provides end-to-end financial services — from instant personal transfers and virtual cards to enterprise payment APIs and regulatory compliance — all built on a robust AWS cloud infrastructure."
     btnExists={true}
-    btnTitle="Schedule a Consultation"
+    btnTitle="Get Started Free"
     btnURL="#"
   />
-  {
-    /* RightSection and LeftSection contain details about various services along with pertinent imagery.
-  They alternate for variety in design.
-  The 'btnExists' property is used to toggle the display of a button in these sections.
-  When btnExists={true}, a button is displayed.
-  This can be used to link to more detailed information or related resources.
-  RightSection can also conditionally render one or two images based on the 'single' property.
-  If 'single' is true, it displays one image, otherwise it displays two.
-  */
-  }
   {
     articles.map(article => {
       return article.isRightSection ? (
@@ -168,24 +155,23 @@ const ogTitle = 'Expert Consultation Services | ScrewFast';
       );
     })
   }
-  {/* FeaturesStats section showcases essential stats valuable to users */}
   <FeaturesStats
-    title="By the Numbers"
-    subTitle="Our commitment to quality and reliability is evident in every project we undertake. At ScrewFast, we are dedicated to delivering industry-leading services that ensure your construction projects are built to last."
-    mainStatTitle="96%"
-    mainStatSubTitle="of our clients rate their experience with ScrewFast as exceptional"
+    title="AlphaPay by the Numbers"
+    subTitle="Our commitment to speed, reliability, and security is reflected in the numbers. Every transaction processed by AlphaPay runs on enterprise-grade AWS infrastructure with 99.99% uptime."
+    mainStatTitle="500k+"
+    mainStatSubTitle="active users sending and receiving money daily across Africa"
     stats={[
       {
-        stat: '99.8%',
-        description: 'project completion rate',
+        stat: '99.99%',
+        description: 'platform uptime on AWS infrastructure',
       },
       {
-        stat: '5,000+',
-        description: 'successful installations',
+        stat: '<2 sec',
+        description: 'average transfer time to banks and wallets',
       },
       {
-        stat: '85%',
-        description: 'client growth year-over-year',
+        stat: '15+',
+        description: 'African countries with instant settlement',
       },
     ]}
   />

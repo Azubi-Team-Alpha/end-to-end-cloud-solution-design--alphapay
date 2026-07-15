@@ -6,8 +6,8 @@ import { SITE } from '@data/constants';
 
 const pageTitle: string = `Contact | ${SITE.title}`;
 const metaDescription =
-  "Have questions or want to discuss a project? Reach out, and let's craft the perfect solution with our tools and services.";
-const ogTitle = 'Contact Us | ScrewFast';
+  "Have questions about AlphaPay or want to reach Team Alpha? Contact us and we'll get back to you within 1-2 business days.";
+const ogTitle = 'Contact AlphaPay | Team Alpha';
 ---
 
 <MainLayout
@@ -20,14 +20,12 @@ const ogTitle = 'Contact Us | ScrewFast';
     '@id': '#!',
     url: '#!',
     name: '#!',
-    description:
-      "Have questions or want to discuss a project? Reach out, and let's craft the perfect solution with our tools and services.",
+    description: metaDescription,
     isPartOf: {
       '@type': '#!',
       url: '#!',
-      name: '#!',
-      description:
-        'ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs.',
+      name: 'AlphaPay',
+      description: SITE.description,
     },
     inLanguage: 'en-US',
   }}
