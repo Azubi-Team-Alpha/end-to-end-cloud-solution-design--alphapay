@@ -9,7 +9,7 @@
 
 **AlphaPay** is a fintech platform for instant, zero-fee cross-border money transfers across Africa. Users can send money to any bank or mobile money wallet in 15+ African countries in under 2 seconds, generate virtual Visa cards for international payments, and businesses can use the full payments API for bulk payroll and merchant collections.
 
-The platform is built as a static **Astro** site (marketing + docs) and deployed on a fully cloud-native **AWS** infrastructure provisioned with **Terraform** and automated via **GitHub Actions CI/CD**.
+The platform is built as an interactive static **Astro** Single Page Application (SPA) and designed for deployment across several cloud-native **AWS** infrastructure models.
 
 ---
 
@@ -23,42 +23,40 @@ The platform is built as a static **Astro** site (marketing + docs) and deployed
 
 | Name | Role |
 |---|---|
-| Mustapha Haadi | Team Lead |
-| David Yirenkyi | Member |
-| Emmanuel Yelisomah | Member |
-| Daniel Hanson Reynolds | Member |
-| Zakaria Adeeba | Member |
-| Evame Cobblah | Member |
+| Mustapha Haadi | Developer (Team Lead) |
+| David Yirenkyi | Developer |
+| Emmanuel Yelisomah | Developer |
+| Daniel Hanson Reynolds | Developer |
+| Zakaria Adeeba | Developer |
+| Evame Cobblah | Developer |
 
 ---
 
 ## Tech Stack
 
 ### Frontend
-- **Astro 6** — Static site generation (SSG)
-- **TailwindCSS v4** — Styling with dark mode
-- **Preline v4** — UI components
+- **Astro 7** — Static site generation (SSG) with SPA transitions via `ClientRouter`
+- **TailwindCSS v4** — Styling with dark mode support
+- **Preline v4** — UI component modules
 - **Starlight** — Developer documentation
 
 ### Cloud Infrastructure (AWS)
 | Service | Purpose |
 |---|---|
-| **Amazon EC2** | Application hosting (Auto Scaling Group) |
-| **Application Load Balancer (ALB)** | Traffic distribution & health checks |
-| **Amazon CloudFront** | CDN for global low-latency delivery |
+| **Amazon S3** | Static website hosting (OAC-protected) |
+| **Amazon EC2** | Application hosting (Nginx Web Server) |
+| **Amazon CloudFront** | Global low-latency Content Delivery Network (CDN) |
 | **AWS Certificate Manager (ACM)** | SSL/TLS certificate management |
-| **Amazon S3** | Static asset storage (OAC-protected) |
-| **AWS IAM** | Least-privilege access control |
-| **Terraform** | Infrastructure as Code (IaC) |
-| **GitHub Actions** | CI/CD pipeline automation |
+| **AWS IAM** | Least-privilege role & access control |
+| **GitHub Actions** | Automated CI/CD pipelines |
 
 ---
 
 ## Getting Started (Local Development)
 
 ### Prerequisites
-- Node.js ≥ 18
-- npm, yarn, pnpm, or bun
+- Node.js ≥ 20
+- npm ≥ 10
 
 ### Install & Run
 
@@ -82,7 +80,7 @@ The dev server runs at `http://localhost:4321`.
 npm run build
 ```
 
-This runs `astro check` (TypeScript validation), `astro build` (static site generation), and post-processes HTML for optimisation.
+This runs `astro check` (TypeScript validation), `astro build` (static site generation), and post-processes HTML for optimization.
 
 ---
 
@@ -90,27 +88,25 @@ This runs `astro check` (TypeScript validation), `astro build` (static site gene
 
 ```
 src/
-├── pages/          # Astro pages (index, services, products, contact, docs)
+├── pages/          # Astro pages (landing, services, contact, signin, signup, dashboard)
 ├── content/        # Markdown/MDX content (products, blog, docs)
-├── components/     # Reusable UI components
-├── data_files/     # Site-wide data (constants, FAQs, pricing, features)
-├── images/         # Local image assets
-└── layouts/        # Page layout shells
+├── components/     # Reusable UI component definitions
+├── data_files/     # Site-wide constants (pricing, FAQs, features)
+├── images/         # Local visual assets
+└── layouts/        # MainLayout shell with ClientRouter setup
 ```
 
 ---
 
-## Deployment Architecture
+## Deployment Options
 
-```
-User → CloudFront CDN → ALB → EC2 Instances (ASG)
-                     ↓
-                S3 (static assets, OAC-only access)
-                ACM (SSL certificate)
-                IAM (least-privilege roles)
-```
+AlphaPay supports three primary deployment configurations:
 
-All infrastructure is defined in Terraform and deployed automatically on push to `main` via GitHub Actions.
+*   **Option A: S3 Serverless Hosting (Recommended)** – Cost-effective, serverless, zero-maintenance. Pushed automatically via CI/CD.
+*   **Option B: EC2 Virtual Server Hosting** – Self-hosted virtual Linux instance with Nginx server blocks and Let's Encrypt SSL.
+*   **Option C: Hybrid EC2 + S3 Sync Hosting** – Files are served from EC2 Nginx but automatically synced/pulled from an S3 bucket source via an IAM Instance Profile.
+
+Detailed step-by-step console instructions, IAM policies, and Nginx setups can be found in the [AWS Deployment Guide](./AWS_DEPLOYMENT.md).
 
 ---
 
@@ -119,7 +115,6 @@ All infrastructure is defined in Terraform and deployed automatically on push to
 | Control | Status |
 |---|---|
 | HTTPS (ACM SSL) | ✅ Active |
-| ALB Health Checks | ✅ Healthy |
 | CloudFront CDN | ✅ Enabled |
 | CI/CD Pipeline | ✅ Live |
 | IAM Least Privilege | ✅ Applied |
