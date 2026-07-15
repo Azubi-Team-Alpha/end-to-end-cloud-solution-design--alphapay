@@ -1,9 +1,10 @@
 # AlphaPay – AWS Deployment Guide
 
-This guide details the step-by-step procedures to build, deploy, and distribute the AlphaPay fintech platform on AWS using two hosting options:
+This guide details the step-by-step procedures to build, deploy, and distribute the AlphaPay fintech platform on AWS using three hosting options:
 
 *   **Option A: S3 Serverless Hosting (Recommended)** – Ultra-cost-effective, serverless, zero-maintenance.
 *   **Option B: EC2 Virtual Server Hosting** – Self-hosted virtual Linux instance with Nginx and SSL.
+*   **Option C: Hybrid EC2 + S3 Sync Hosting** – Static files served from EC2 Nginx but automatically synced/pulled from an S3 bucket source.
 
 ---
 
@@ -195,6 +196,80 @@ To cache content globally and protect the EC2 instance from DDoS attacks:
     *   **Allowed HTTP Methods**: `GET, HEAD, OPTIONS`.
 5. **Cache Key & Origin Requests**: Select **CacheOptimized**.
 6. **SSL Certificate**: Generate/Attach the ACM SSL certificate matching `alphapay.africa` to the distribution.
+
+
+---
+
+## Option C: Hybrid EC2 + S3 Sync Hosting (Automated Static Pull)
+
+### Architecture
+```
+GitHub Actions (CI/CD) → S3 Bucket (Private source)
+                               ↑ (IAM Role read sync)
+                         EC2 Instance (Nginx pulls from S3 via cron)
+                               ↑
+                         CloudFront (CDN + SSL)
+```
+
+In this option, the CI/CD pipeline remains simple and only pushes static files to the private S3 bucket. The EC2 instance securely pulls/syncs files from S3 to Nginx's local `/var/www/alphapay` directory using an IAM Role.
+
+### 1. Create and Attach IAM Role to EC2
+To authorize the EC2 instance to pull files from S3 without hardcoding secret keys:
+1. Go to the **IAM Console** → **Roles** → **Create Role**.
+2. **Select Trusted Entity**: Choose **AWS Service** → **EC2**.
+3. **Permissions**: Attach the **AmazonS3ReadOnlyAccess** managed policy.
+4. **Name**: `alphapay-ec2-s3-role`.
+5. Go to the **EC2 Console** → select your instance → click **Actions** → **Security** → **Modify IAM role**.
+6. Select `alphapay-ec2-s3-role` and click **Update IAM role**.
+
+### 2. Configure Nginx Server Blocks
+Setup Nginx to serve the `/var/www/alphapay` directory (use the same Nginx configuration detailed in **Option B, Step 4**).
+
+### 3. Install AWS CLI on the EC2 Server
+Connect to your EC2 instance via SSH and install the AWS Command Line Interface:
+```bash
+sudo apt update -y
+sudo apt install unzip -y
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+# Verify integration (should list files without needing config keys)
+aws s3 ls s3://alphapay-africa-static
+```
+
+### 4. Create the S3 Auto-Sync Script
+1. Create the sync script:
+```bash
+sudo nano /usr/local/bin/sync-s3-to-nginx.sh
+```
+2. Paste this script inside (make sure to replace with your S3 bucket name):
+```bash
+#!/bin/bash
+# Sync files from S3 to Nginx root directory
+aws s3 sync s3://alphapay-africa-static /var/www/alphapay/ --delete
+
+# Set permissions
+chown -R ubuntu:ubuntu /var/www/alphapay/
+chmod -R 755 /var/www/alphapay/
+```
+3. Make the script executable:
+```bash
+sudo chmod +x /usr/local/bin/sync-s3-to-nginx.sh
+```
+
+### 5. Schedule Automated Sync via Cron
+To check for and pull S3 updates automatically every 2 minutes:
+1. Open the crontab editor:
+```bash
+crontab -e
+```
+2. Add this line at the bottom of the file:
+```cron
+*/2 * * * * /usr/local/bin/sync-s3-to-nginx.sh > /dev/null 2>&1
+```
+
+### 6. Configure SSL (Certbot) & CloudFront CDN
+Refer to **Option B, Steps 6 & 7** to configure Let's Encrypt SSL certificates for Nginx and route traffic securely through a CloudFront CDN.
 
 ---
 
