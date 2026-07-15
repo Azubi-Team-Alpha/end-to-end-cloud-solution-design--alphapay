@@ -288,91 +288,123 @@ const pageTitle = `Dashboard | ${SITE.title}`;
 </MainLayout>
 
 <script>
-  // ── Session Authentication Guard ──────────────────────────────────────────────
-  const rawUser = localStorage.getItem('alphapay_user');
-  if (!rawUser) {
-    window.location.href = '/signin';
-  } else {
-    const user = JSON.parse(rawUser);
-    document.getElementById('dashboard-root')!.classList.remove('hidden');
-
-    // Populate user profile info
-    document.getElementById('user-greeting')!.textContent = `Hello, ${user.name}!`;
-    document.getElementById('user-display-name')!.textContent = user.name;
-    document.getElementById('user-display-email')!.textContent = user.email;
-    document.getElementById('user-balance')!.textContent = user.balance || 'GH₵ 0.00';
-
-    if (user.accountType) {
-      const badge = document.getElementById('account-badge')!;
-      badge.textContent = user.accountType === 'business' ? '🏢 Business' : '👤 Personal';
-      badge.classList.remove('hidden');
-    }
-  }
-
-  // ── Logout logic ──────────────────────────────────────────────────────────────
-  document.getElementById('logout-btn')?.addEventListener('click', () => {
-    localStorage.removeItem('alphapay_user');
-    window.location.href = '/';
-  });
-
-  // ── Quick action modal ────────────────────────────────────────────────────────
-  const modalEl = document.getElementById('action-modal')!;
-  const modalTitle = document.getElementById('modal-title')!;
-  const modalBody = document.getElementById('modal-body')!;
-
-  const actionInfo: Record<string, { title: string; body: string }> = {
-    send:    { title: '💸 Send Money',    body: 'Enter a recipient name and amount in the "Quick Send" widget on the right sidebar to transfer funds instantly.' },
-    receive: { title: '📥 Receive Funds', body: 'Share your registered email or phone number with the sender. Local transfers settle instantly with zero fees.' },
-    topup:   { title: '💳 Top Up Wallet', body: 'Load your AlphaPay account from a linked credit/debit card, or directly via mobile money (MTN MoMo/Telecel).' },
-    history: { title: '📊 Transfer History',  body: 'Complete digital bank statements and tax invoices will be available for download here shortly.' },
-  };
-
-  document.querySelectorAll('.quick-action').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const action = btn.getAttribute('data-action') || 'send';
-      const info = actionInfo[action];
-      modalTitle.textContent = info.title;
-      modalBody.textContent = info.body;
-      modalEl.classList.remove('hidden');
-      modalEl.classList.add('flex');
-    });
-  });
-
-  const closeModal = () => { modalEl.classList.add('hidden'); modalEl.classList.remove('flex'); };
-  document.getElementById('modal-close')?.addEventListener('click', closeModal);
-  modalEl.addEventListener('click', e => { if (e.target === modalEl) closeModal(); });
-
-  // ── Quick Send Payment Handler ────────────────────────────────────────────────
-  document.getElementById('send-btn')?.addEventListener('click', async () => {
-    const recipientInput = document.getElementById('send-recipient') as HTMLInputElement;
-    const amountInput = document.getElementById('send-amount') as HTMLInputElement;
-    const recipient = recipientInput.value.trim();
-    const amountVal = amountInput.value.trim();
-
-    if (!recipient || !amountVal || Number(amountVal) <= 0) {
-      alert('Please enter a valid recipient name/details and a payment amount greater than zero.');
+  document.addEventListener('astro:page-load', () => {
+    // ── Session Authentication Guard ──────────────────────────────────────────────
+    const rawUser = localStorage.getItem('alphapay_user');
+    if (!rawUser) {
+      // If we are on the dashboard page and not logged in, redirect
+      if (window.location.pathname.endsWith('/dashboard')) {
+        window.location.href = '/signin';
+      }
       return;
     }
+    
+    const user = JSON.parse(rawUser);
+    const rootEl = document.getElementById('dashboard-root');
+    if (!rootEl) return; // Guard if elements are not on the current DOM
+    
+    rootEl.classList.remove('hidden');
 
-    const btn = document.getElementById('send-btn') as HTMLButtonElement;
-    btn.textContent = 'Processing Payment…';
-    btn.disabled = true;
+    // Populate user profile info
+    const greetingEl = document.getElementById('user-greeting');
+    if (greetingEl) greetingEl.textContent = `Hello, ${user.name}!`;
 
-    // Simulate network delay
-    await new Promise(r => setTimeout(r, 1500));
+    const displayNameEl = document.getElementById('user-display-name');
+    if (displayNameEl) displayNameEl.textContent = user.name;
 
-    // Show feedback
-    const feedback = document.getElementById('send-feedback')!;
-    feedback.classList.remove('hidden');
+    const displayEmailEl = document.getElementById('user-display-email');
+    if (displayEmailEl) displayEmailEl.textContent = user.email;
 
-    // Reset fields
-    recipientInput.value = '';
-    amountInput.value = '';
+    const balanceEl = document.getElementById('user-balance');
+    if (balanceEl) balanceEl.textContent = user.balance || 'GH₵ 0.00';
 
-    btn.textContent = 'Send Funds';
-    btn.disabled = false;
+    const badge = document.getElementById('account-badge');
+    if (badge) {
+      if (user.accountType) {
+        badge.textContent = user.accountType === 'business' ? '🏢 Business' : '👤 Personal';
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
 
-    // Hide feedback alert after 4 seconds
-    setTimeout(() => feedback.classList.add('hidden'), 4000);
+    // ── Logout logic ──────────────────────────────────────────────────────────────
+    document.getElementById('logout-btn')?.addEventListener('click', () => {
+      localStorage.removeItem('alphapay_user');
+      window.location.href = '/';
+    });
+
+    // ── Quick action modal ────────────────────────────────────────────────────────
+    const modalEl = document.getElementById('action-modal')!;
+    const modalTitle = document.getElementById('modal-title')!;
+    const modalBody = document.getElementById('modal-body')!;
+
+    const actionInfo: Record<string, { title: string; body: string }> = {
+      send:    { title: '💸 Send Money',    body: 'Enter a recipient name and amount in the "Quick Send" widget on the right sidebar to transfer funds instantly.' },
+      receive: { title: '📥 Receive Funds', body: 'Share your registered email or phone number with the sender. Local transfers settle instantly with zero fees.' },
+      topup:   { title: '💳 Top Up Wallet', body: 'Load your AlphaPay account from a linked credit/debit card, or directly via mobile money (MTN MoMo/Telecel).' },
+      history: { title: '📊 Transfer History',  body: 'Complete digital bank statements and tax invoices will be available for download here shortly.' },
+    };
+
+    document.querySelectorAll('.quick-action').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-action') || 'send';
+        const info = actionInfo[action];
+        if (modalTitle && modalBody && modalEl) {
+          modalTitle.textContent = info.title;
+          modalBody.textContent = info.body;
+          modalEl.classList.remove('hidden');
+          modalEl.classList.add('flex');
+        }
+      });
+    });
+
+    const closeModal = () => {
+      if (modalEl) {
+        modalEl.classList.add('hidden');
+        modalEl.classList.remove('flex');
+      }
+    };
+    document.getElementById('modal-close')?.addEventListener('click', closeModal);
+    modalEl?.addEventListener('click', e => { if (e.target === modalEl) closeModal(); });
+
+    // ── Quick Send Payment Handler ────────────────────────────────────────────────
+    document.getElementById('send-btn')?.addEventListener('click', async () => {
+      const recipientInput = document.getElementById('send-recipient') as HTMLInputElement;
+      const amountInput = document.getElementById('send-amount') as HTMLInputElement;
+      if (!recipientInput || !amountInput) return;
+
+      const recipient = recipientInput.value.trim();
+      const amountVal = amountInput.value.trim();
+
+      if (!recipient || !amountVal || Number(amountVal) <= 0) {
+        alert('Please enter a valid recipient name/details and a payment amount greater than zero.');
+        return;
+      }
+
+      const btn = document.getElementById('send-btn') as HTMLButtonElement;
+      btn.textContent = 'Processing Payment…';
+      btn.disabled = true;
+
+      // Simulate network delay
+      await new Promise(r => setTimeout(r, 1500));
+
+      // Show feedback
+      const feedback = document.getElementById('send-feedback')!;
+      if (feedback) feedback.classList.remove('hidden');
+
+      // Reset fields
+      recipientInput.value = '';
+      amountInput.value = '';
+
+      btn.textContent = 'Send Funds';
+      btn.disabled = false;
+
+      // Hide feedback alert after 4 seconds
+      setTimeout(() => {
+        const fb = document.getElementById('send-feedback');
+        if (fb) fb.classList.add('hidden');
+      }, 4000);
+    });
   });
 </script>

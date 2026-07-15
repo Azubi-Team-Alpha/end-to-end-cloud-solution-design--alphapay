@@ -45,16 +45,21 @@ interface Props {
     <title>{title}</title>
     <ClientRouter />
     <script is:inline>
-      // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
-      if (
-        localStorage.getItem('hs_theme') === 'dark' ||
-        (!('hs_theme' in localStorage) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      // Script to handle dark mode. It checks localStorage or system settings
+      const applyTheme = () => {
+        if (
+          localStorage.getItem('hs_theme') === 'dark' ||
+          (!('hs_theme' in localStorage) &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      };
+
+      applyTheme();
+      document.addEventListener('astro:after-swap', applyTheme);
     </script>
     <script>
       import '@scripts/lenisSmoothScroll.js';
@@ -80,13 +85,13 @@ interface Props {
     {showFooter && <FooterSection />}
     <script>
       import 'preline';
-      const init = () =>
+      const init = () => {
         (
           window as Window & { HSStaticMethods?: { autoInit?: () => void } }
         ).HSStaticMethods?.autoInit?.();
-      if (document.readyState === 'loading')
-        document.addEventListener('DOMContentLoaded', init);
-      else init();
+      };
+      
+      document.addEventListener('astro:page-load', init);
     </script>
     <style>
       /* CSS rules for the page scrollbar */
