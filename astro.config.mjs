@@ -7,6 +7,7 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://alphapay.africa',
+  output: 'static',
   image: {
     domains: ['images.unsplash.com'],
   },
