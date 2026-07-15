@@ -1,14 +1,14 @@
 import ogImageSrc from '@images/social.png';
 
 export const SITE = {
-  title: 'ScrewFast',
-  tagline: 'Top-quality Hardware Tools',
+  title: 'AlphaPay',
+  tagline: 'Move Money Freely Across Africa',
   description:
-    'ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs. Start exploring and contact our sales team for superior quality and reliability.',
+    'Send, receive, and manage money instantly. Zero fees on local transfers. Built for Africans, trusted worldwide.',
   description_short:
-    'ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs.',
+    'Move money freely across Africa and beyond. Send, receive, and manage money instantly.',
   url: '#!',
-  author: 'Emil Gulamov',
+  author: 'Team Alpha',
 };
 
 export const SEO = {
@@ -35,9 +35,9 @@ export const OG = {
   locale: 'en_US',
   type: 'website',
   url: SITE.url,
-  title: `${SITE.title}: : Hardware Tools & Construction Services`,
+  title: `${SITE.title}: Move Money Freely Across Africa`,
   description:
-    "Equip your projects with ScrewFast's top-quality hardware tools and expert construction services. Trusted by industry leaders, ScrewFast offers simplicity, affordability, and reliability. Experience the difference with user-centric design and cutting-edge tools. Start exploring now!",
+    "Send, receive, and manage money instantly with AlphaPay. Zero fees on local transfers. Built for Africans, trusted worldwide. Fully deployed via robust cloud infrastructure by Team Alpha.",
   image: ogImageSrc,
 };
 

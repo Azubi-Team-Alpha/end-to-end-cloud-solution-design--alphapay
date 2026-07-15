@@ -518,4 +518,60 @@ export const Icons = {
     strokeLinejoin: 'round',
     stroke: 'currentColor',
   },
+  card: {
+    paths: [
+      { d: 'M3 10h18M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z' }
+    ],
+    class: 'mt-1 h-8 w-8 shrink-0 text-orange-400 dark:text-orange-300',
+    width: 24,
+    height: 24,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+  },
+  lock: {
+    paths: [
+      { d: 'M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2Zm10-10V7a4 4 0 0 0-8 0v4' }
+    ],
+    class: 'mt-1 h-8 w-8 shrink-0 text-orange-400 dark:text-orange-300',
+    width: 24,
+    height: 24,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+  },
+  mobile: {
+    paths: [
+      { d: 'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm7 15h.01' }
+    ],
+    class: 'mt-1 h-8 w-8 shrink-0 text-orange-400 dark:text-orange-300',
+    width: 24,
+    height: 24,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+  },
+  transfer: {
+    paths: [
+      { d: 'M17 4v16m0 0 3-3m-3 3-3-3M7 20V4m0 0 3 3M7 4 4 7' }
+    ],
+    class: 'mt-1 h-8 w-8 shrink-0 text-orange-400 dark:text-orange-300',
+    width: 24,
+    height: 24,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '2',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+  },
 };

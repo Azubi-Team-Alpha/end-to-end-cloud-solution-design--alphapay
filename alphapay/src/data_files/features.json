@@ -1,22 +1,32 @@
 [
   {
-    "heading": "Dedicated Teams",
-    "content": "Benefit from our committed teams who ensure your success is personal. Count on expert guidance and exceptional results throughout your project journey.",
-    "svg": "groups"
+    "heading": "Instant transfers",
+    "content": "Send money to any bank or mobile money account in seconds. Available 24/7.",
+    "svg": "transfer"
   },
   {
-    "heading": "Simplicity and Affordability",
-    "content": "Find easy-to-use, affordable solutions with ScrewFast's line of tools and equipment. Our products make procurement simple and keep projects within budget.",
-    "svg": "verified"
+    "heading": "Virtual card",
+    "content": "Get a virtual Visa card instantly. Shop online, subscribe globally, pay in USD.",
+    "svg": "card"
   },
   {
-    "heading": "Comprehensive Documentation",
-    "content": "Integrate with ease using ScrewFast's exhaustive guides and libraries. Achieve seamless product adoption with our full suite of documentation designed for your success.",
-    "svg": "books"
+    "heading": "Bank-grade security",
+    "content": "256-bit encryption, 2FA, and real-time fraud monitoring on every transaction.",
+    "svg": "lock"
   },
   {
-    "heading": "User-Centric Design",
-    "content": "Experience the difference with ScrewFast's user-focused design — where functionality meets practicality for an enhanced work experience.",
-    "svg": "frame"
+    "heading": "Cross-border payments",
+    "content": "Send to 15+ African countries with the best exchange rates available.",
+    "svg": "earth"
+  },
+  {
+    "heading": "Mobile money",
+    "content": "MTN, Vodafone, Airtel — send directly to any mobile wallet instantly.",
+    "svg": "mobile"
+  },
+  {
+    "heading": "Business dashboard",
+    "content": "Bulk payments, collections, and analytics for growing businesses.",
+    "svg": "dashboard"
   }
 ]

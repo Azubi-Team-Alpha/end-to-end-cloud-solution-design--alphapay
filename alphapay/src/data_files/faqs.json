@@ -1,29 +1,29 @@
 {
-  "subTitle": "Ask us anything about our brand and products, and get factual responses.",
+  "subTitle": "Have questions about AlphaPay? Find instant answers to our most frequently asked questions here.",
   "faqs": [
     {
-      "question": "What types of tools are included in the Starter Kit?",
-      "answer": "The Starter Kit features essential hand and power tools for diverse DIY projects, including hammers, drills, screwdrivers, and a variety of fasteners. It's a curated selection to help beginners and experienced DIYers alike tackle most home improvement tasks."
+      "question": "How fast are transfers on AlphaPay?",
+      "answer": "Transfers on AlphaPay are instant. Money is sent to the recipient's bank account or mobile wallet in less than 2 seconds, and the service is available 24/7."
     },
     {
-      "question": "Can I upgrade from the Starter Kit to the Professional Toolbox?",
-      "answer": "Absolutely! You can upgrade to the Professional Toolbox at any time to access a wider range of high-quality tools, enjoy priority customer support, and receive exclusive content. Contact our support team for a seamless transition."
+      "question": "Are there any fees for sending money?",
+      "answer": "Local transfers within the same country are completely free (zero fees). Cross-border transfers between different African countries use highly competitive mid-market exchange rates with minimal transparent transaction fees shown upfront."
     },
     {
-      "question": "What discounts are available for bulk orders through the Professional Toolbox plan?",
-      "answer": "Professional Toolbox members are entitled to exclusive discounts on bulk orders, the percentage of which may vary depending on the order volume. Get in touch with us to discuss your needs, and we'll provide a tailored discount structure."
+      "question": "How do I get a Virtual Visa Card?",
+      "answer": "You can generate a virtual card directly from your dashboard in less than a minute. You can use it to pay for online shopping, global subscriptions, and international services in USD."
     },
     {
-      "question": "What kind of customer support can I expect?",
-      "answer": "All our customers receive dedicated email support. With the Starter Kit, you'll receive our standard support, while the Professional Toolbox plan upgrades you to priority support, meaning faster response times and specialized assistance."
+      "question": "Is AlphaPay secure?",
+      "answer": "Yes, AlphaPay is built with bank-grade security. It uses 256-bit SSL encryption, 2FA authentication, and automated real-time fraud detection. It is deployed securely on AWS behind an Application Load Balancer with ACM SSL certificates."
     },
     {
-      "question": "How current are the online resources and tutorials?",
-      "answer": "We regularly update our online resources and tutorials to reflect the latest trends in DIY and construction, as well as introductions to new tools and techniques. Our material aims to be comprehensive and user-friendly for all skill levels."
+      "question": "What mobile money networks are supported?",
+      "answer": "AlphaPay supports all major mobile money networks across our active countries, including MTN Mobile Money, Telecel/Vodafone Cash, AirtelTigo, M-Pesa, and Orange Money, alongside direct bank account deposits."
     },
     {
-      "question": "Does ScrewFast offer services for large-scale construction projects?",
-      "answer": "Yes, our Enterprise Solutions are designed for larger companies requiring comprehensive services. We provide consultation, planning, and supply of high-grade tools and materials, as well as staffing solutions for substantial construction needs. Contact us for a customized quote."
+      "question": "Who built AlphaPay?",
+      "answer": "AlphaPay was designed and built by Team Alpha as part of the Azubi Africa Internship Programme - Capstone Project 1: End-to-End Cloud Solution Design and Deployment."
     }
   ]
 }

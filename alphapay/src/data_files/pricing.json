@@ -1,38 +1,39 @@
 {
   "title": "Simple, Transparent Pricing",
-  "subTitle": "Boost efficiency with ScrewFast's clear, value-driven plans.",
-  "badge": "Best value",
-  "thirdOption": "Enterprise Solutions?",
-  "btnText": "Get a Custom Quote",
+  "subTitle": "Choose the account type that fits your financial needs. No hidden charges.",
+  "badge": "Popular",
+  "thirdOption": "Looking for business solutions?",
+  "btnText": "Contact Business Sales",
 
   "starterKit": {
-    "name": "Starter Kit",
-    "description": "Best option for DIY projects",
-    "price": "49",
+    "name": "Personal Account",
+    "description": "Best option for individuals and families",
+    "price": "0",
     "cents": ".00",
-    "billingFrequency": "USD / monthly",
+    "billingFrequency": "USD / forever free",
     "features": [
-      "Key hardware tools",
-      "Access to guides & tutorials",
-      "Standard support"
+      "Zero fees on local transfers",
+      "Instant mobile money & bank transfers",
+      "24/7 client support",
+      "Virtual Visa card access"
     ],
-    "purchaseBtnTitle": "Get the Starter Kit",
+    "purchaseBtnTitle": "Get Started",
     "purchaseLink": "#"
   },
 
   "professionalToolbox": {
-    "name": "Professional Toolbox",
-    "description": "Best for large scale uses",
-    "price": "89",
-    "cents": ".00",
-    "billingFrequency": "USD / monthly",
+    "name": "Business Account",
+    "description": "Best for merchants and growing enterprises",
+    "price": "Custom",
+    "cents": "",
+    "billingFrequency": "Transaction-based fees",
     "features": [
-      "Premium tool selection",
-      "Priority support",
-      "Exclusive content & deals",
-      "Bulk order discounts"
+      "Bulk payouts and payouts API",
+      "Payment gateway & collections api",
+      "Comprehensive merchant analytics",
+      "Priority dedicated support"
     ],
-    "purchaseBtnTitle": "Get the Professional Toolbox",
+    "purchaseBtnTitle": "Open a Business Account",
     "purchaseLink": "#"
   }
 }

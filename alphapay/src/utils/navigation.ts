@@ -1,28 +1,26 @@
 // An array of links for navigation bar
 const navBarLinks = [
   { name: 'Home', url: '/' },
-  { name: 'Products', url: '/products' },
-  { name: 'Services', url: '/services' },
-  { name: 'Blog', url: '/blog' },
+  { name: 'About', url: '/#about' },
+  { name: 'Dashboard', url: '/#dashboard' },
   { name: 'Contact', url: '/contact' },
 ];
 // An array of links for footer
 const footerLinks = [
   {
-    section: 'Ecosystem',
+    section: 'Cloud Architecture',
     links: [
-      { name: 'Documentation', url: '/welcome-to-docs/' },
-      { name: 'Tools & Equipment', url: '/products' },
-      { name: 'Construction Services', url: '/services' },
+      { name: 'AWS EC2 hosting', url: '/#about' },
+      { name: 'Application Load Balancer', url: '/#about' },
+      { name: 'CloudFront CDN', url: '/#about' },
     ],
   },
   {
-    section: 'Company',
+    section: 'Project',
     links: [
-      { name: 'About us', url: '#' },
-      { name: 'Blog', url: '/blog' },
-      { name: 'Careers', url: '#' },
-      { name: 'Customers', url: '#' },
+      { name: 'About us', url: '/#about' },
+      { name: 'Team Alpha', url: '/#contact' },
+      { name: 'GitHub repository', url: 'https://github.com/Mustapha-Haadi/internship-cloud-solution-design' },
     ],
   },
 ];
@@ -30,7 +28,7 @@ const footerLinks = [
 const socialLinks = {
   facebook: '#',
   x: '#',
-  github: '#',
+  github: 'https://github.com/Mustapha-Haadi/internship-cloud-solution-design',
   google: '#',
   slack: '#',
 };
