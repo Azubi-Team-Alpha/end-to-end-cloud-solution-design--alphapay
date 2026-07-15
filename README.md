@@ -127,7 +127,3 @@ Detailed step-by-step console instructions, IAM policies, and Nginx setups can b
 MIT — see [LICENSE](./LICENSE)
 
 ---
-
-## Acknowledgements
-
-Built on top of the [ScrewFast](https://github.com/mearashadowfax/ScrewFast) open-source Astro template by Emil Gulamov, distributed by [ThemeWagon](https://themewagon.com). Adapted and extended by Team Alpha for the AlphaPay fintech use case.
