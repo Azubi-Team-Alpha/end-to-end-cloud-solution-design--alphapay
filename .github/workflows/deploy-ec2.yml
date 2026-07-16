@@ -10,6 +10,7 @@ jobs:
   deploy-to-ec2:
     name: Deploy to EC2
     runs-on: ubuntu-latest
+    environment: end-to-end-cloud
 
     steps:
       # ── 1. Checkout repository ────────────────────────────────────────────────
