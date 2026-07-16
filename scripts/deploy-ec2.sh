@@ -73,11 +73,11 @@ RELOAD_COMMANDS=$(cat <<'EOF'
     sudo systemctl enable nginx
   fi
 
-  # Shift the default server block port in nginx.conf from 80 to 8080 to prevent conflicts
+  # Shift the default server block port in nginx.conf from 80 to 8080 to prevent conflicts (idempotent)
   if [ -f /etc/nginx/nginx.conf ]; then
     echo "Disabling default server block on port 80 in /etc/nginx/nginx.conf..."
-    sudo sed -i -r 's/listen\s+80/listen 8080/g' /etc/nginx/nginx.conf || true
-    sudo sed -i -r 's/listen\s+\[::\]:80/listen [::]:8080/g' /etc/nginx/nginx.conf || true
+    sudo sed -i -r 's/listen\s+80[0-9]*/listen 8080/g' /etc/nginx/nginx.conf || true
+    sudo sed -i -r 's/listen\s+\[::\]:80[0-9]*/listen [::]:8080/g' /etc/nginx/nginx.conf || true
   fi
 
   # Automatically setup basic catch-all Nginx block if none exists
