@@ -1,0 +1,55 @@
+---
+title: SDKs & Custom Integrations
+description: AlphaPay SDKs, no-code integrations, and custom enterprise solutions.
+sidebar:
+  label: SDKs & Custom Integrations
+  order: 4
+---
+import { LinkCard, CardGrid, Aside } from "@astrojs/starlight/components";
+
+AlphaPay provides official SDKs and integration libraries to help you integrate faster, with less boilerplate.
+
+## Official SDKs
+
+<CardGrid>
+  <LinkCard title="Node.js SDK" description="npm install alphapay-node" href="#" />
+  <LinkCard title="Python SDK" description="pip install alphapay-python" href="#" />
+  <LinkCard title="PHP SDK" description="composer require alphapay/php-sdk" href="#" />
+</CardGrid>
+
+### Node.js Quick Example
+
+```javascript
+const AlphaPay = require('alphapay-node');
+const client = new AlphaPay(process.env.ALPHAPAY_SECRET_KEY);
+
+const transfer = await client.transfers.create({
+  amount: 500,
+  currency: 'GHS',
+  recipient_phone: '+233241234567',
+  network: 'mtn',
+  description: 'Invoice payment',
+});
+console.log(transfer.transfer_id);
+```
+
+## No-Code Integrations
+
+For teams that prefer no-code or low-code solutions:
+
+- **WooCommerce Plugin** — Accept payments on your WordPress store
+- **Shopify App** — Listed in the Shopify App Store
+- **Zapier Integration** — Trigger AlphaPay transfers from 5,000+ apps
+- **Google Sheets Add-on** — Bulk payroll from a spreadsheet
+
+## Enterprise & Custom Integrations
+
+<Aside type="tip">
+  For custom enterprise requirements — white-labelling, dedicated infrastructure, or custom FX agreements — contact our enterprise sales team at enterprise@alphapay.africa
+</Aside>
+
+Enterprise integrations include:
+- Dedicated API rate limits and SLA guarantees
+- Custom webhook event schemas
+- Direct settlement accounts in multiple currencies
+- On-site integration support from the AlphaPay engineering team

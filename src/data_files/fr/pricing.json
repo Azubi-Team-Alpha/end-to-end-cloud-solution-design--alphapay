@@ -1,0 +1,39 @@
+{
+  "title": "Tarification simple et transparente",
+  "subTitle": "Choisissez le type de compte qui correspond à vos besoins financiers. Sans frais cachés.",
+  "badge": "Populaire",
+  "thirdOption": "Vous recherchez des solutions d'entreprise ?",
+  "btnText": "Contacter le service commercial",
+
+  "starterKit": {
+    "name": "Compte Personnel",
+    "description": "La meilleure option pour les particuliers et les familles",
+    "price": "0",
+    "cents": ".00",
+    "billingFrequency": "USD / gratuit pour toujours",
+    "features": [
+      "Zéro frais sur les transferts locaux",
+      "Transferts instantanés vers portefeuilles mobiles et banques",
+      "Support client 24h/24 et 7j/7",
+      "Accès à la carte Visa virtuelle"
+    ],
+    "purchaseBtnTitle": "Commencer",
+    "purchaseLink": "#"
+  },
+
+  "professionalToolbox": {
+    "name": "Compte Professionnel",
+    "description": "Idéal pour les marchands et les entreprises en pleine croissance",
+    "price": "Personnalisé",
+    "cents": "",
+    "billingFrequency": "Frais basés sur les transactions",
+    "features": [
+      "Paiements groupés et API de décaissement",
+      "Passerelle de paiement et API de collecte",
+      "Analyses complètes pour les marchands",
+      "Support dédié prioritaire"
+    ],
+    "purchaseBtnTitle": "Ouvrir un compte professionnel",
+    "purchaseLink": "#"
+  }
+}

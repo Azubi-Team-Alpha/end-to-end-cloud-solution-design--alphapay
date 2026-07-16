@@ -1,0 +1,29 @@
+{
+  "subTitle": "Have questions about AlphaPay? Find instant answers to our most frequently asked questions here.",
+  "faqs": [
+    {
+      "question": "How fast are transfers on AlphaPay?",
+      "answer": "Transfers on AlphaPay are instant. Money is sent to the recipient's bank account or mobile wallet in less than 2 seconds, and the service is available 24/7."
+    },
+    {
+      "question": "Are there any fees for sending money?",
+      "answer": "Local transfers within the same country are completely free (zero fees). Cross-border transfers between different African countries use highly competitive mid-market exchange rates with minimal transparent transaction fees shown upfront."
+    },
+    {
+      "question": "How do I get a Virtual Visa Card?",
+      "answer": "You can generate a virtual card directly from your dashboard in less than a minute. You can use it to pay for online shopping, global subscriptions, and international services in USD."
+    },
+    {
+      "question": "Is AlphaPay secure?",
+      "answer": "Yes, AlphaPay is built with bank-grade security. It uses 256-bit SSL encryption, 2FA authentication, and automated real-time fraud detection. It is deployed securely on AWS behind an Application Load Balancer with ACM SSL certificates."
+    },
+    {
+      "question": "What mobile money networks are supported?",
+      "answer": "AlphaPay supports all major mobile money networks across our active countries, including MTN Mobile Money, Telecel/Vodafone Cash, AirtelTigo, M-Pesa, and Orange Money, alongside direct bank account deposits."
+    },
+    {
+      "question": "Who built AlphaPay?",
+      "answer": "AlphaPay was designed and built by Team Alpha as part of the Azubi Africa Internship Programme - Capstone Project 1: End-to-End Cloud Solution Design and Deployment."
+    }
+  ]
+}

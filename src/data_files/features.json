@@ -1,0 +1,32 @@
+[
+  {
+    "heading": "Instant transfers",
+    "content": "Send money to any bank or mobile money account in seconds. Available 24/7.",
+    "svg": "transfer"
+  },
+  {
+    "heading": "Virtual card",
+    "content": "Get a virtual Visa card instantly. Shop online, subscribe globally, pay in USD.",
+    "svg": "card"
+  },
+  {
+    "heading": "Bank-grade security",
+    "content": "256-bit encryption, 2FA, and real-time fraud monitoring on every transaction.",
+    "svg": "lock"
+  },
+  {
+    "heading": "Cross-border payments",
+    "content": "Send to 15+ African countries with the best exchange rates available.",
+    "svg": "earth"
+  },
+  {
+    "heading": "Mobile money",
+    "content": "MTN, Vodafone, Airtel — send directly to any mobile wallet instantly.",
+    "svg": "mobile"
+  },
+  {
+    "heading": "Business dashboard",
+    "content": "Bulk payments, collections, and analytics for growing businesses.",
+    "svg": "dashboard"
+  }
+]

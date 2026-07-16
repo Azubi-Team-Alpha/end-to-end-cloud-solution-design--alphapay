@@ -1,0 +1,136 @@
+---
+// Importing necessary components
+import MainLayout from '@/layouts/MainLayout.astro';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import CardSmall from '@components/ui/cards/CardSmall.astro';
+import CardWide from '@components/ui/cards/CardWide.astro';
+import FeaturesStatsAlt from '@components/sections/features/FeaturesStatsAlt.astro';
+import TestimonialsSectionAlt from '@components/sections/testimonials/TestimonialsSectionAlt.astro';
+
+// Importing necessary functions from Astro
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { SITE } from '@data/constants';
+
+// Fetching all the product related content and sorting it by main.id
+const product: CollectionEntry<'products'>[] = (
+  await getCollection('products', ({ id }) => {
+    return id.startsWith('en/');
+  })
+).sort(
+  (a: CollectionEntry<'products'>, b: CollectionEntry<'products'>) =>
+    a.data.main.id - b.data.main.id
+);
+
+// Define variables for page content
+const title: string = 'Our Products';
+const subTitle: string =
+  'Explore AlphaPay\'s full suite of financial products — from personal wallets and virtual Visa cards to business payment APIs and cross-border transfer infrastructure. Every product is built for speed, security, and the African market.';
+
+// Testimonial data that will be rendered in the component
+const testimonials = [
+  {
+    content:
+      '"AlphaPay\'s virtual card changed the way I shop online. I can now pay for international subscriptions in USD directly from my GHS wallet with zero complications. The setup took under a minute."',
+    author: 'Akosua Mensah',
+    role: 'Freelance Designer | Accra, Ghana',
+    avatarSrc: 'https://i.pravatar.cc/320?img=47',
+    avatarAlt: 'Akosua Mensah avatar',
+  },
+  {
+    content:
+      '"We switched our payroll to AlphaPay and went from a 3-day process to same-day disbursement for all 85 staff. The bulk payment API was straightforward to integrate and the webhook notifications are reliable."',
+    author: 'Emeka Okafor',
+    role: 'CFO | GreenLeaf Agribusiness, Lagos',
+    avatarSrc: 'https://i.pravatar.cc/320?img=12',
+    avatarAlt: 'Emeka Okafor avatar',
+  },
+  {
+    content:
+      '"Cross-border transfers to our Kenya office used to take 3-5 days and cost a fortune in fees. With AlphaPay, funds arrive in under 2 seconds and the exchange rates are the best we\'ve found anywhere."',
+    author: 'Amina Wambua',
+    role: 'Operations Lead | PanAfrica Logistics, Nairobi',
+    avatarSrc: 'https://i.pravatar.cc/320?img=32',
+    avatarAlt: 'Amina Wambua avatar',
+  },
+];
+
+const pageTitle: string = `Products | ${SITE.title}`;
+const metaDescription =
+  'Explore AlphaPay\'s product suite — personal wallets, virtual cards, business payment APIs, and cross-border transfer infrastructure built for Africa.';
+const ogTitle = 'AlphaPay Products | African Fintech Payment Suite';
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://alphapay.africa/products',
+    url: 'https://alphapay.africa/products',
+    name: 'AlphaPay Products | African Fintech Payment Suite',
+    description: metaDescription,
+    isPartOf: {
+      '@type': 'WebSite',
+      url: 'https://alphapay.africa',
+      name: 'AlphaPay',
+      description: 'Send, receive, and manage money instantly across Africa.',
+    },
+    inLanguage: 'en-US',
+  }}
+>
+  <div
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
+      <div class="flex items-center gap-12">
+        <h1
+          class="text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200"
+        >
+          {title}
+        </h1>
+        {
+          subTitle && (
+            <p class="hidden max-w-(--breakpoint-sm) text-pretty text-neutral-600 md:block dark:text-neutral-400">
+              {subTitle}
+            </p>
+          )
+        }
+      </div>
+      <PrimaryCTA title="Customer Stories" url="#testimonials" noArrow={true} />
+    </div>
+    {
+      /* Displaying products in alternating styles. Alternative product gets different card styling.
+    Maps through all product entries and displays them with either CardSmall or CardWide based on their position. */
+    }
+    <section class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+      {
+        product.map((product, index) => {
+          const position = index % 4;
+          if (position === 0 || position === 3) {
+            return <CardSmall product={product} />;
+          } else {
+            return <CardWide product={product} />;
+          }
+        })
+      }
+    </section>
+  </div>
+  {/* Features statistics section */}
+  <FeaturesStatsAlt
+    title="Why Choose AlphaPay?"
+    subTitle="Whether you're an individual sending money home, a freelancer getting paid internationally, or a business running bulk payroll — AlphaPay has a product built for your exact need."
+    benefits={[
+      'Zero fees on local transfers — keep more of your money.',
+      'Instant settlement to banks and mobile wallets across 15+ African countries.',
+      'Enterprise-grade AWS security with 99.99% uptime guarantee.',
+    ]}
+  />
+  {/* Testimonials section */}
+  <TestimonialsSectionAlt
+    title="Trusted Across the Continent"
+    testimonials={testimonials}
+  />
+</MainLayout>

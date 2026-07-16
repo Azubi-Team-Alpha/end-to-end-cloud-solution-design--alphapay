@@ -1,0 +1,410 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import BrandLogo from '@components/BrandLogo.astro';
+import { SITE } from '@data/constants';
+
+const pageTitle = `Dashboard | ${SITE.title}`;
+---
+
+<MainLayout title={pageTitle} showNav={false} showFooter={false}>
+  {/* Auth guard — content shown only after JS validates session */}
+  <div id="dashboard-root" class="hidden min-h-screen bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
+
+    {/* ── Dashboard Navigation Header ────────────────────────────────────────── */}
+    <header class="sticky top-0 z-40 border-b border-neutral-200 bg-neutral-100/90 backdrop-blur-md dark:border-neutral-700 dark:bg-neutral-900/90">
+      <div class="mx-auto max-w-[85rem] px-4 py-3 sm:px-6 lg:px-8 2xl:max-w-full">
+        <div class="flex items-center justify-between">
+          
+          {/* Brand Logo & Tag */}
+          <div class="flex items-center gap-3">
+            <a href="/" class="focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 rounded-lg">
+              <BrandLogo />
+            </a>
+            <span class="hidden sm:inline-block h-4 w-px bg-neutral-300 dark:bg-neutral-700"></span>
+            <span class="hidden sm:inline-block text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+              User Portal
+            </span>
+          </div>
+
+          {/* User Controls & Logout */}
+          <div class="flex items-center gap-x-4">
+            <div class="hidden md:flex flex-col items-end">
+              <span id="user-display-name" class="text-sm font-bold text-neutral-800 dark:text-neutral-100">Loading…</span>
+              <span id="user-display-email" class="text-[10px] text-neutral-500 dark:text-neutral-400">loading@alphapay.africa</span>
+            </div>
+            
+            {/* Account Type Badge */}
+            <span
+              id="account-badge"
+              class="hidden rounded-full border border-yellow-300 bg-yellow-100 px-2.5 py-0.5 text-xs font-semibold text-yellow-800 dark:border-yellow-600/40 dark:bg-yellow-900/20 dark:text-yellow-400"
+            >
+              Personal
+            </span>
+
+            {/* Sign Out Button */}
+            <button
+              id="logout-btn"
+              class="inline-flex items-center gap-x-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3.5 py-2 text-xs font-bold text-neutral-700 transition duration-300 hover:bg-neutral-200 focus-visible:ring-3 outline-hidden ring-zinc-500 dark:border-neutral-700 dark:bg-neutral-850 dark:text-neutral-300 dark:hover:bg-neutral-700"
+            >
+              <svg class="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 01-3-3h4a3 3 0 013 3v1" />
+              </svg>
+              Sign out
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    {/* ── Main Dashboard Workspace ───────────────────────────────────────────── */}
+    <main class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-8 2xl:max-w-full">
+      
+      {/* Greeting Header */}
+      <div class="mb-6">
+        <h1 id="user-greeting" class="text-2xl font-extrabold tracking-tight text-neutral-800 dark:text-neutral-100 sm:text-3xl">
+          Hello, User!
+        </h1>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">
+          Here is your financial overview for today.
+        </p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+
+        {/* ── LEFT & CENTER COLUMNS (Balance, Actions, Transactions) ────────────── */}
+        <div class="lg:col-span-2 space-y-6">
+
+          {/* Balance card */}
+          <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Total Wallet Balance
+                </span>
+                <p id="user-balance" class="mt-1.5 text-4xl font-extrabold tracking-tight text-neutral-800 dark:text-neutral-100 sm:text-5xl">
+                  GH₵ 0.00
+                </p>
+                <p class="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+                  ≈ $0.00 USD &nbsp;·&nbsp;
+                  <span class="font-semibold text-green-600 dark:text-green-500">↑ +12.4% this month</span>
+                </p>
+              </div>
+              <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-yellow-400 text-neutral-800 shadow-sm">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Quick action buttons */}
+            <div class="mt-6 border-t border-neutral-200 pt-5 dark:border-neutral-800">
+              <div class="grid grid-cols-4 gap-2 sm:gap-4">
+                {[
+                  { label: 'Send Money', icon: '💸', action: 'send' },
+                  { label: 'Receive', icon: '📥', action: 'receive' },
+                  { label: 'Top Up', icon: '💳', action: 'topup' },
+                  { label: 'History', icon: '📊', action: 'history' },
+                ].map(btn => (
+                  <button
+                    data-action={btn.action}
+                    class="quick-action flex flex-col items-center gap-2 group cursor-pointer p-2 rounded-xl transition hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                  >
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-100 text-xl transition duration-300 group-hover:bg-yellow-400 group-hover:border-yellow-400 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:group-hover:bg-yellow-400 dark:group-hover:text-neutral-800">
+                      {btn.icon}
+                    </div>
+                    <span class="text-xs font-medium text-neutral-700 dark:text-neutral-300 text-center leading-tight">
+                      {btn.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Recent Transactions List */}
+          <div class="rounded-xl border border-neutral-200 bg-neutral-50 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+            <div class="flex items-center justify-between border-b border-neutral-200 px-6 py-4 dark:border-neutral-800">
+              <h2 class="text-base font-bold text-neutral-800 dark:text-neutral-100">
+                Recent Transactions
+              </h2>
+              <button class="text-xs font-semibold text-orange-400 hover:text-orange-500 hover:underline dark:text-orange-400">
+                View all activity
+              </button>
+            </div>
+            
+            <div class="divide-y divide-neutral-200 px-6 dark:divide-neutral-800">
+              {[
+                { name: 'Kofi Agyeman', desc: 'Freelance Design Invoice', time: 'Today, 10:24 AM', amount: '+GH₵ 500.00', positive: true, initial: 'K' },
+                { name: 'Ama Boateng', desc: 'Lunch reimbursement', time: 'Yesterday, 3:11 PM', amount: '-GH₵ 150.00', positive: false, initial: 'A' },
+                { name: 'Mobile Money Top-up', desc: 'Wallet loading via MTN MoMo', time: '12 Jul, 9:00 AM', amount: '+GH₵ 1,200.00', positive: true, initial: 'M' },
+                { name: 'David Yirenkyi', desc: 'Shared ride split', time: '10 Jul, 2:45 PM', amount: '-GH₵ 75.00', positive: false, initial: 'D' },
+                { name: 'Zakaria Adeeba', desc: 'Equipment purchase refund', time: '09 Jul, 11:30 AM', amount: '+GH₵ 320.00', positive: true, initial: 'Z' },
+              ].map(tx => (
+                <div class="flex items-center justify-between py-4 transition hover:bg-neutral-100/30 dark:hover:bg-neutral-800/10">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-neutral-200 bg-neutral-100 text-sm font-bold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+                      {tx.initial}
+                    </div>
+                    <div class="min-w-0">
+                      <p class="text-sm font-bold text-neutral-800 dark:text-neutral-100 truncate">{tx.name}</p>
+                      <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">{tx.desc} &nbsp;·&nbsp; {tx.time}</p>
+                    </div>
+                  </div>
+                  <span class={`text-sm font-extrabold ${tx.positive ? 'text-green-600 dark:text-green-500' : 'text-red-500 dark:text-red-400'}`}>
+                    {tx.amount}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        {/* ── RIGHT COLUMN (Quick Send, Security, Wallets) ────────────────────── */}
+        <div class="space-y-6">
+
+          {/* Quick Send Wallet Widget */}
+          <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+            <h2 class="mb-4 text-base font-bold text-neutral-800 dark:text-neutral-100">
+              Quick Send
+            </h2>
+            <div class="space-y-4">
+              <div>
+                <label for="send-recipient" class="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Recipient Details
+                </label>
+                <input
+                  type="text"
+                  id="send-recipient"
+                  placeholder="Enter name, email, or phone"
+                  class="block w-full rounded-lg border border-neutral-200 bg-neutral-100 px-4 py-3 text-sm text-neutral-800 placeholder-neutral-400 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:placeholder-neutral-500"
+                />
+              </div>
+
+              <div>
+                <label for="send-amount" class="mb-2 block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Amount (GH₵)
+                </label>
+                <input
+                  type="number"
+                  id="send-amount"
+                  placeholder="0.00"
+                  min="1"
+                  class="block w-full rounded-lg border border-neutral-200 bg-neutral-100 px-4 py-3 text-sm text-neutral-800 placeholder-neutral-400 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:placeholder-neutral-500"
+                />
+              </div>
+
+              <button
+                id="send-btn"
+                class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-yellow-400 px-4 py-3 text-sm font-bold text-neutral-700 transition duration-300 hover:bg-yellow-500 focus-visible:ring-3 outline-hidden ring-zinc-500"
+              >
+                Send Funds
+              </button>
+
+              <div
+                id="send-feedback"
+                class="hidden rounded-lg border border-green-200 bg-green-50 p-3 text-xs text-green-700 dark:border-green-800/30 dark:bg-green-950/20 dark:text-green-400"
+              >
+                ✅ Money sent successfully! Wallet balance updated.
+              </div>
+            </div>
+          </div>
+
+          {/* Account Security Widget */}
+          <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+            <h2 class="mb-4 text-base font-bold text-neutral-800 dark:text-neutral-100">
+              Security Status
+            </h2>
+            <div class="space-y-3">
+              {[
+                { label: 'HTTPS Encryption', ok: true, text: 'Secure Connection' },
+                { label: 'Email Verification', ok: true, text: 'Verified' },
+                { label: 'KYC Status', ok: false, text: 'Pending Verification' },
+                { label: 'Transaction PIN', ok: true, text: 'PIN Configured' },
+              ].map(sec => (
+                <div class="flex items-center justify-between border-b border-neutral-200/60 pb-2 last:border-0 last:pb-0 dark:border-neutral-800">
+                  <div class="min-w-0">
+                    <p class="text-xs font-semibold text-neutral-700 dark:text-neutral-300">{sec.label}</p>
+                    <p class="text-[10px] text-neutral-500 dark:text-neutral-450">{sec.text}</p>
+                  </div>
+                  {sec.ok ? (
+                    <span class="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[9px] font-bold text-green-800 dark:bg-green-950/30 dark:text-green-400">
+                      ● Active
+                    </span>
+                  ) : (
+                    <span class="inline-flex items-center gap-1 rounded-full bg-yellow-100 px-2 py-0.5 text-[9px] font-bold text-yellow-800 dark:bg-yellow-950/30 dark:text-yellow-450">
+                      ▲ Action Required
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Linked Mobile Wallets */}
+          <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+            <h2 class="mb-3 text-base font-bold text-neutral-800 dark:text-neutral-100">
+              Linked Mobile Wallets
+            </h2>
+            <div class="space-y-2.5">
+              {[
+                { name: 'MTN Mobile Money', phone: '024 *** 456', providerColor: 'bg-yellow-400' },
+                { name: 'Telecel Cash', phone: '050 *** 789', providerColor: 'bg-red-500' },
+              ].map(wallet => (
+                <div class="flex items-center gap-3 rounded-lg border border-neutral-200 bg-neutral-100/50 p-3 dark:border-neutral-700 dark:bg-neutral-800/30">
+                  <div class={`h-2.5 w-2.5 shrink-0 rounded-full ${wallet.providerColor}`}></div>
+                  <div class="min-w-0">
+                    <p class="text-xs font-bold text-neutral-800 dark:text-neutral-200">{wallet.name}</p>
+                    <p class="text-[10px] text-neutral-500 dark:text-neutral-400">{wallet.phone}</p>
+                  </div>
+                </div>
+              ))}
+              <button class="inline-flex w-full items-center justify-center gap-x-1 rounded-lg border border-dashed border-neutral-300 py-2.5 text-xs font-bold text-neutral-500 transition hover:border-yellow-400 hover:text-yellow-600 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-yellow-500 dark:hover:text-yellow-400">
+                + Link New Wallet
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  {/* Modal for Generic Quick Actions */}
+  <div id="action-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-neutral-900/70 p-4">
+    <div class="w-full max-w-sm rounded-xl border border-neutral-200 bg-neutral-50 p-7 shadow-xl dark:border-neutral-700 dark:bg-neutral-900">
+      <h3 id="modal-title" class="mb-2 text-lg font-bold text-neutral-800 dark:text-neutral-100">Action</h3>
+      <p id="modal-body" class="text-sm text-neutral-600 dark:text-neutral-400"></p>
+      <button id="modal-close"
+        class="mt-5 inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-yellow-400 px-4 py-3 text-sm font-bold text-neutral-700 transition duration-300 hover:bg-yellow-500 focus-visible:ring-3 outline-hidden ring-zinc-500">
+        Close Window
+      </button>
+    </div>
+  </div>
+</MainLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // ── Session Authentication Guard ──────────────────────────────────────────────
+    const rawUser = localStorage.getItem('alphapay_user');
+    if (!rawUser) {
+      // If we are on the dashboard page and not logged in, redirect
+      if (window.location.pathname.endsWith('/dashboard')) {
+        window.location.href = '/signin';
+      }
+      return;
+    }
+    
+    const user = JSON.parse(rawUser);
+    const rootEl = document.getElementById('dashboard-root');
+    if (!rootEl) return; // Guard if elements are not on the current DOM
+    
+    rootEl.classList.remove('hidden');
+
+    // Populate user profile info
+    const greetingEl = document.getElementById('user-greeting');
+    if (greetingEl) greetingEl.textContent = `Hello, ${user.name}!`;
+
+    const displayNameEl = document.getElementById('user-display-name');
+    if (displayNameEl) displayNameEl.textContent = user.name;
+
+    const displayEmailEl = document.getElementById('user-display-email');
+    if (displayEmailEl) displayEmailEl.textContent = user.email;
+
+    const balanceEl = document.getElementById('user-balance');
+    if (balanceEl) balanceEl.textContent = user.balance || 'GH₵ 0.00';
+
+    const badge = document.getElementById('account-badge');
+    if (badge) {
+      if (user.accountType) {
+        badge.textContent = user.accountType === 'business' ? '🏢 Business' : '👤 Personal';
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    // ── Logout logic ──────────────────────────────────────────────────────────────
+    document.getElementById('logout-btn')?.addEventListener('click', () => {
+      localStorage.removeItem('alphapay_user');
+      window.location.href = '/';
+    });
+
+    // ── Quick action modal ────────────────────────────────────────────────────────
+    const modalEl = document.getElementById('action-modal')!;
+    const modalTitle = document.getElementById('modal-title')!;
+    const modalBody = document.getElementById('modal-body')!;
+
+    const actionInfo: Record<string, { title: string; body: string }> = {
+      send:    { title: '💸 Send Money',    body: 'Enter a recipient name and amount in the "Quick Send" widget on the right sidebar to transfer funds instantly.' },
+      receive: { title: '📥 Receive Funds', body: 'Share your registered email or phone number with the sender. Local transfers settle instantly with zero fees.' },
+      topup:   { title: '💳 Top Up Wallet', body: 'Load your AlphaPay account from a linked credit/debit card, or directly via mobile money (MTN MoMo/Telecel).' },
+      history: { title: '📊 Transfer History',  body: 'Complete digital bank statements and tax invoices will be available for download here shortly.' },
+    };
+
+    document.querySelectorAll('.quick-action').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-action') || 'send';
+        const info = actionInfo[action];
+        if (modalTitle && modalBody && modalEl) {
+          modalTitle.textContent = info.title;
+          modalBody.textContent = info.body;
+          modalEl.classList.remove('hidden');
+          modalEl.classList.add('flex');
+        }
+      });
+    });
+
+    const closeModal = () => {
+      if (modalEl) {
+        modalEl.classList.add('hidden');
+        modalEl.classList.remove('flex');
+      }
+    };
+    document.getElementById('modal-close')?.addEventListener('click', closeModal);
+    modalEl?.addEventListener('click', e => { if (e.target === modalEl) closeModal(); });
+
+    // ── Quick Send Payment Handler ────────────────────────────────────────────────
+    document.getElementById('send-btn')?.addEventListener('click', async () => {
+      const recipientInput = document.getElementById('send-recipient') as HTMLInputElement;
+      const amountInput = document.getElementById('send-amount') as HTMLInputElement;
+      if (!recipientInput || !amountInput) return;
+
+      const recipient = recipientInput.value.trim();
+      const amountVal = amountInput.value.trim();
+
+      if (!recipient || !amountVal || Number(amountVal) <= 0) {
+        alert('Please enter a valid recipient name/details and a payment amount greater than zero.');
+        return;
+      }
+
+      const btn = document.getElementById('send-btn') as HTMLButtonElement;
+      btn.textContent = 'Processing Payment…';
+      btn.disabled = true;
+
+      // Simulate network delay
+      await new Promise(r => setTimeout(r, 1500));
+
+      // Show feedback
+      const feedback = document.getElementById('send-feedback')!;
+      if (feedback) feedback.classList.remove('hidden');
+
+      // Reset fields
+      recipientInput.value = '';
+      amountInput.value = '';
+
+      btn.textContent = 'Send Funds';
+      btn.disabled = false;
+
+      // Hide feedback alert after 4 seconds
+      setTimeout(() => {
+        const fb = document.getElementById('send-feedback');
+        if (fb) fb.classList.add('hidden');
+      }, 4000);
+    });
+  });
+</script>
