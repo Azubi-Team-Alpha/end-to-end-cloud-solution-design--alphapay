@@ -1,0 +1,323 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE } from '@data/constants';
+
+const pageTitle = `Create Account | ${SITE.title}`;
+const metaDescription = 'Create your free AlphaPay account and start sending money across Africa instantly.';
+---
+
+<MainLayout title={pageTitle} customDescription={metaDescription}>
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+    <div class="mx-auto max-w-md">
+
+      <div class="mb-6 text-center">
+        <h1 class="text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200">
+          Create your AlphaPay account
+        </h1>
+        <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+          Already have an account?{' '}
+          <a href="/signin" class="font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-400">
+            Sign in here
+          </a>
+        </p>
+      </div>
+
+      {/* Step indicator */}
+      <div class="mb-5 flex gap-2">
+        <div id="step1-bar" class="h-1.5 flex-1 rounded-full bg-yellow-400 transition-all"></div>
+        <div id="step2-bar" class="h-1.5 flex-1 rounded-full bg-neutral-300 transition-all dark:bg-neutral-600"></div>
+      </div>
+
+      <div class="rounded-xl border border-neutral-200 bg-neutral-100 shadow-xs dark:border-neutral-700 dark:bg-neutral-800">
+        <div class="overflow-y-auto p-4 sm:p-7">
+
+          {/* Step 1 — Personal info */}
+          <form id="signup-step1">
+            <div class="mb-6 text-center">
+              <div class="block text-xl font-bold text-neutral-800 dark:text-neutral-200" role="heading" aria-level="2">
+                Your details
+              </div>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Tell us a bit about yourself</p>
+            </div>
+
+            <div class="grid gap-y-4">
+              {/* Name row */}
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="first-name" class="mb-2 block text-sm text-neutral-800 dark:text-neutral-200">First name</label>
+                  <input type="text" id="first-name" name="firstName" placeholder="Kofi" autocomplete="given-name"
+                    class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1" />
+                  <p id="fname-err" class="mt-2 hidden text-xs text-red-600">Required</p>
+                </div>
+                <div>
+                  <label for="last-name" class="mb-2 block text-sm text-neutral-800 dark:text-neutral-200">Last name</label>
+                  <input type="text" id="last-name" name="lastName" placeholder="Agyeman" autocomplete="family-name"
+                    class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1" />
+                  <p id="lname-err" class="mt-2 hidden text-xs text-red-600">Required</p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div>
+                <label for="signup-email" class="mb-2 block text-sm text-neutral-800 dark:text-neutral-200">Email address</label>
+                <input type="email" id="signup-email" name="email" placeholder="you@example.com" autocomplete="email"
+                  class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1" />
+                <p id="email-err" class="mt-2 hidden text-xs text-red-600">Please enter a valid email address.</p>
+              </div>
+
+              {/* Phone */}
+              <div>
+                <label for="signup-phone" class="mb-2 block text-sm text-neutral-800 dark:text-neutral-200">Phone number</label>
+                <div class="flex gap-2">
+                  <select id="phone-prefix"
+                    class="w-28 shrink-0 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300">
+                    <option value="+233">🇬🇭 +233</option>
+                    <option value="+234">🇳🇬 +234</option>
+                    <option value="+254">🇰🇪 +254</option>
+                    <option value="+256">🇺🇬 +256</option>
+                    <option value="+27">🇿🇦 +27</option>
+                    <option value="+255">🇹🇿 +255</option>
+                    <option value="+250">🇷🇼 +250</option>
+                    <option value="+221">🇸🇳 +221</option>
+                    <option value="+225">🇨🇮 +225</option>
+                  </select>
+                  <input type="tel" id="signup-phone" name="phone" placeholder="024 000 0000"
+                    class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1" />
+                </div>
+                <p id="phone-err" class="mt-2 hidden text-xs text-red-600">Please enter a phone number.</p>
+              </div>
+
+              <button type="submit"
+                class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-yellow-400 px-4 py-3 text-sm font-bold text-neutral-700 transition duration-300 hover:bg-yellow-500 focus-visible:ring-3 outline-hidden ring-zinc-500 dark:focus:outline-hidden 2xl:text-base">
+                Continue →
+              </button>
+            </div>
+          </form>
+
+          {/* Step 2 — Security */}
+          <form id="signup-step2" class="hidden">
+            <div class="mb-6 text-center">
+              <div class="block text-xl font-bold text-neutral-800 dark:text-neutral-200" role="heading" aria-level="2">
+                Secure your account
+              </div>
+              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Choose a strong password</p>
+            </div>
+
+            <div class="grid gap-y-4">
+              {/* Password */}
+              <div>
+                <label for="create-password" class="mb-2 block text-sm text-neutral-800 dark:text-neutral-200">Create password</label>
+                <div class="relative">
+                  <input type="password" id="create-password" name="password" placeholder="••••••••" autocomplete="new-password"
+                    class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1" />
+                </div>
+                {/* Strength bar */}
+                <div class="mt-2 flex gap-1">
+                  <div id="bar1" class="h-1 flex-1 rounded-full bg-neutral-200 transition-all dark:bg-neutral-600"></div>
+                  <div id="bar2" class="h-1 flex-1 rounded-full bg-neutral-200 transition-all dark:bg-neutral-600"></div>
+                  <div id="bar3" class="h-1 flex-1 rounded-full bg-neutral-200 transition-all dark:bg-neutral-600"></div>
+                  <div id="bar4" class="h-1 flex-1 rounded-full bg-neutral-200 transition-all dark:bg-neutral-600"></div>
+                </div>
+                <p id="strength-label" class="mt-1 text-xs text-neutral-400"></p>
+                <p id="pw-err" class="mt-2 hidden text-xs text-red-600">Password must be at least 8 characters.</p>
+              </div>
+
+              {/* Confirm password */}
+              <div>
+                <label for="confirm-password" class="mb-2 block text-sm text-neutral-800 dark:text-neutral-200">Confirm password</label>
+                <input type="password" id="confirm-password" name="confirmPassword" placeholder="••••••••" autocomplete="new-password"
+                  class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1" />
+                <p id="confirm-err" class="mt-2 hidden text-xs text-red-600">Passwords do not match.</p>
+              </div>
+
+              {/* Account type */}
+              <div>
+                <label class="mb-2 block text-sm text-neutral-800 dark:text-neutral-200">Account type</label>
+                <div class="grid grid-cols-2 gap-3">
+                  <label for="type-personal" class="account-card flex cursor-pointer items-center gap-3 rounded-lg border-2 border-yellow-400 bg-yellow-50 p-3 transition dark:border-yellow-500/60 dark:bg-yellow-900/10">
+                    <input type="radio" id="type-personal" name="accountType" value="personal" checked class="sr-only" />
+                    <span class="text-lg">👤</span>
+                    <div>
+                      <p class="text-xs font-bold text-neutral-800 dark:text-neutral-200">Personal</p>
+                      <p class="text-[10px] text-neutral-500 dark:text-neutral-400">Individuals</p>
+                    </div>
+                  </label>
+                  <label for="type-business" class="account-card flex cursor-pointer items-center gap-3 rounded-lg border-2 border-neutral-200 p-3 transition hover:border-yellow-300 dark:border-neutral-600 dark:hover:border-yellow-600">
+                    <input type="radio" id="type-business" name="accountType" value="business" class="sr-only" />
+                    <span class="text-lg">🏢</span>
+                    <div>
+                      <p class="text-xs font-bold text-neutral-800 dark:text-neutral-200">Business</p>
+                      <p class="text-[10px] text-neutral-500 dark:text-neutral-400">Merchants</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Terms */}
+              <div class="flex items-center">
+                <div class="flex">
+                  <input id="terms-agree" name="terms" type="checkbox"
+                    class="pointer-events-none mt-0.5 shrink-0 rounded-sm border-neutral-200 text-neutral-600 focus:ring-yellow-400 dark:border-neutral-700 dark:bg-neutral-800 dark:checked:border-yellow-400 dark:checked:bg-yellow-400 dark:focus:ring-offset-neutral-800" />
+                </div>
+                <div class="ms-3">
+                  <label for="terms-agree" class="text-sm text-neutral-800 dark:text-neutral-200">
+                    I accept the{' '}
+                    <a href="#" class="font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-400">Terms and Conditions</a>
+                  </label>
+                </div>
+              </div>
+              <p id="terms-err" class="hidden text-xs text-red-600">You must accept the terms to continue.</p>
+
+              {/* Buttons */}
+              <div class="flex gap-3">
+                <button type="button" id="back-btn"
+                  class="inline-flex flex-1 items-center justify-center gap-x-2 rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm font-medium text-neutral-700 transition duration-300 hover:bg-neutral-200 focus-visible:ring-3 outline-hidden dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700">
+                  ← Back
+                </button>
+                <button type="submit" id="create-btn"
+                  class="inline-flex flex-[2] items-center justify-center gap-x-2 rounded-lg border border-transparent bg-yellow-400 px-4 py-3 text-sm font-bold text-neutral-700 transition duration-300 hover:bg-yellow-500 focus-visible:ring-3 outline-hidden ring-zinc-500 dark:focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 2xl:text-base">
+                  <span id="create-text">Create account</span>
+                  <span id="create-loading" class="hidden inline-flex items-center gap-x-1">
+                    <svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                    </svg>
+                    Creating…
+                  </span>
+                </button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  const step1Form = document.getElementById('signup-step1') as HTMLFormElement;
+  const step2Form = document.getElementById('signup-step2') as HTMLFormElement;
+  const step1Bar = document.getElementById('step1-bar')!;
+  const step2Bar = document.getElementById('step2-bar')!;
+  const backBtn = document.getElementById('back-btn')!;
+  let userData: Record<string, string> = {};
+
+  // ── Step 1 submit ─────────────────────────────────────────────────────────────
+  step1Form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const firstName = (document.getElementById('first-name') as HTMLInputElement).value.trim();
+    const lastName = (document.getElementById('last-name') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('signup-email') as HTMLInputElement).value.trim();
+    const phone = (document.getElementById('signup-phone') as HTMLInputElement).value.trim();
+    const prefix = (document.getElementById('phone-prefix') as HTMLSelectElement).value;
+    let valid = true;
+
+    document.getElementById('fname-err')!.classList.toggle('hidden', !!firstName);
+    document.getElementById('lname-err')!.classList.toggle('hidden', !!lastName);
+    if (!firstName || !lastName) valid = false;
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    document.getElementById('email-err')!.classList.toggle('hidden', emailOk);
+    if (!emailOk) valid = false;
+
+    document.getElementById('phone-err')!.classList.toggle('hidden', !!phone);
+    if (!phone) valid = false;
+
+    if (!valid) return;
+
+    userData = { firstName, lastName, email, phone: prefix + phone };
+    step1Form.classList.add('hidden');
+    step2Form.classList.remove('hidden');
+    step1Bar.classList.replace('bg-yellow-400', 'bg-yellow-300');
+    step2Bar.classList.replace('bg-neutral-300', 'bg-yellow-400');
+    step2Bar.classList.replace('dark:bg-neutral-600', 'dark:bg-yellow-500');
+  });
+
+  // ── Back button ───────────────────────────────────────────────────────────────
+  backBtn.addEventListener('click', () => {
+    step2Form.classList.add('hidden');
+    step1Form.classList.remove('hidden');
+    step1Bar.classList.replace('bg-yellow-300', 'bg-yellow-400');
+    step2Bar.classList.replace('bg-yellow-400', 'bg-neutral-300');
+    step2Bar.classList.replace('dark:bg-yellow-500', 'dark:bg-neutral-600');
+  });
+
+  // ── Account type radio cards ──────────────────────────────────────────────────
+  document.querySelectorAll('input[name="accountType"]').forEach((input, i) => {
+    input.addEventListener('change', () => {
+      document.querySelectorAll('.account-card').forEach((card, j) => {
+        const isSelected = i === j;
+        card.classList.toggle('border-yellow-400', isSelected);
+        card.classList.toggle('dark:border-yellow-500/60', isSelected);
+        card.classList.toggle('bg-yellow-50', isSelected);
+        card.classList.toggle('dark:bg-yellow-900/10', isSelected);
+        card.classList.toggle('border-neutral-200', !isSelected);
+        card.classList.toggle('dark:border-neutral-600', !isSelected);
+      });
+    });
+  });
+
+  // ── Password strength ─────────────────────────────────────────────────────────
+  const pwInput = document.getElementById('create-password') as HTMLInputElement;
+  const bars = ['bar1','bar2','bar3','bar4'].map(id => document.getElementById(id)!);
+  const strengthLabel = document.getElementById('strength-label')!;
+
+  pwInput.addEventListener('input', () => {
+    const v = pwInput.value;
+    let s = 0;
+    if (v.length >= 8) s++;
+    if (v.length >= 12) s++;
+    if (/[A-Z]/.test(v) && /[a-z]/.test(v)) s++;
+    if (/\d/.test(v) && /[^A-Za-z0-9]/.test(v)) s++;
+    s = Math.min(s, 4);
+    const colors = ['bg-red-400','bg-orange-400','bg-yellow-400','bg-yellow-500'];
+    const labels = ['Too weak','Weak','Fair','Strong'];
+    bars.forEach((b, i) => {
+      b.className = `h-1 flex-1 rounded-full transition-all ${i < s ? colors[s-1] : 'bg-neutral-200 dark:bg-neutral-600'}`;
+    });
+    strengthLabel.textContent = v ? labels[Math.max(0, s-1)] : '';
+  });
+
+  // ── Step 2 submit ─────────────────────────────────────────────────────────────
+  step2Form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const password = pwInput.value;
+    const confirm = (document.getElementById('confirm-password') as HTMLInputElement).value;
+    const terms = (document.getElementById('terms-agree') as HTMLInputElement).checked;
+    const accountType = (document.querySelector('input[name="accountType"]:checked') as HTMLInputElement)?.value;
+    let valid = true;
+
+    document.getElementById('pw-err')!.classList.toggle('hidden', password.length >= 8);
+    if (password.length < 8) valid = false;
+
+    document.getElementById('confirm-err')!.classList.toggle('hidden', password === confirm);
+    if (password !== confirm) valid = false;
+
+    document.getElementById('terms-err')!.classList.toggle('hidden', terms);
+    if (!terms) valid = false;
+
+    if (!valid) return;
+
+    const createText = document.getElementById('create-text')!;
+    const createLoading = document.getElementById('create-loading')!;
+    const createBtn = document.getElementById('create-btn') as HTMLButtonElement;
+    createText.classList.add('hidden');
+    createLoading.classList.remove('hidden');
+    createBtn.disabled = true;
+
+    await new Promise(r => setTimeout(r, 1500));
+
+    localStorage.setItem('alphapay_user', JSON.stringify({
+      name: `${userData.firstName} ${userData.lastName}`,
+      email: userData.email,
+      phone: userData.phone,
+      accountType,
+      balance: 'GH₵ 0.00',
+      isNew: true,
+      loginTime: new Date().toISOString(),
+    }));
+
+    window.location.href = '/dashboard';
+  });
+</script>

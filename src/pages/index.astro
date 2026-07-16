@@ -1,0 +1,306 @@
+---
+// Import the necessary components
+import MainLayout from '@/layouts/MainLayout.astro';
+import HeroSection from '@components/sections/landing/HeroSection.astro';
+import HeroSectionAlt from '@components/sections/landing/HeroSectionAlt.astro';
+import ClientsSection from '@components/sections/landing/ClientsSection.astro';
+import FeaturesGeneral from '@components/sections/features/FeaturesGeneral.astro';
+import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
+import TestimonialsSection from '@components/sections/testimonials/TestimonialsSection.astro';
+import PricingSection from '@components/sections/pricing/PricingSection.astro';
+import FAQ from '@components/sections/misc/FAQ.astro';
+import AnnouncementBanner from '@components/ui/banners/AnnouncementBanner.astro';
+import heroImage from '@images/hero-image.avif';
+import faqs from '@data/faqs.json';
+import features from '@data/features.json';
+import pricing from '@data/pricing.json';
+import featureImage from '@images/features-image.avif';
+import construction from '@images/construction-image.avif';
+import tools from '@images/automated-tools.avif';
+import dashboard from '@images/dashboard-image.avif';
+import { partnersData } from '@/data_files/constants';
+
+const avatarSrcs: Array<string> = [
+  'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+];
+---
+
+<MainLayout>
+  <AnnouncementBanner
+    btnId="dismiss-button"
+    btnTitle="Explore our Cloud Solution Design on GitHub"
+    url="https://github.com/Mustapha-Haadi/internship-cloud-solution-design"
+  />
+
+  <HeroSection
+    title=`Move money freely <br /><span class="text-blue-600 dark:text-blue-500">across Africa</span><br />and beyond`
+    subTitle="Send, receive, and manage money instantly. Zero fees on local transfers. Built for Africans, trusted worldwide."
+    primaryBtn="Get Started Free"
+    primaryBtnURL="/signup"
+    secondaryBtn="Sign In"
+    secondaryBtnURL="/signin"
+    withReview={true}
+    avatars={avatarSrcs}
+    rating=`4.9`
+    starCount={5}
+    reviews=`Trusted by over 500k+ users`
+  >
+    {/* Styled interactive phone card to match original static HTML */}
+    <div class="w-full max-w-sm rounded-[24px] bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 p-6 shadow-2xl transition duration-300 hover:shadow-blue-500/10 hover:border-blue-500/20 text-neutral-800 dark:text-neutral-100">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Total balance</span>
+        <span class="text-lg cursor-pointer hover:scale-115 transition">🔔</span>
+      </div>
+      <div class="text-3xl font-extrabold text-neutral-900 dark:text-neutral-100">GH₵ 4,820.00</div>
+      <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">≈ $320 USD &nbsp;·&nbsp; <span class="text-green-600 dark:text-green-500 font-medium">+12.4% this month</span></div>
+      
+      <div class="border-t border-neutral-200 dark:border-neutral-800 my-4"></div>
+      
+      <div class="flex justify-around">
+        <div class="flex flex-col items-center gap-1 cursor-pointer group">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-bold text-lg group-hover:scale-105 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/60 transition">↑</div>
+          <span class="text-[11px] font-medium text-neutral-600 dark:text-neutral-400">Send</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 cursor-pointer group">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-bold text-lg group-hover:scale-105 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/60 transition">↓</div>
+          <span class="text-[11px] font-medium text-neutral-600 dark:text-neutral-400">Receive</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 cursor-pointer group">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-bold text-lg group-hover:scale-105 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/60 transition">⊕</div>
+          <span class="text-[11px] font-medium text-neutral-600 dark:text-neutral-400">Top up</span>
+        </div>
+        <div class="flex flex-col items-center gap-1 cursor-pointer group">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-bold text-lg group-hover:scale-105 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/60 transition">⋯</div>
+          <span class="text-[11px] font-medium text-neutral-600 dark:text-neutral-400">More</span>
+        </div>
+      </div>
+      
+      <div class="border-t border-neutral-200 dark:border-neutral-800 my-4"></div>
+      
+      <div class="text-[11px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-2">Recent transactions</div>
+      
+      <div class="flex justify-between items-center py-2 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/30 rounded-xl px-2 transition">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full font-bold text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400">KA</div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">Kofi Agyeman</span>
+            <span class="text-[10px] text-neutral-500 dark:text-neutral-400">Today, 10:24 AM</span>
+          </div>
+        </div>
+        <span class="text-sm font-bold text-green-600 dark:text-green-500">+GH₵ 500</span>
+      </div>
+      
+      <div class="flex justify-between items-center py-2 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/30 rounded-xl px-2 transition">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full font-bold text-xs bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400">AB</div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">Ama Boateng</span>
+            <span class="text-[10px] text-neutral-500 dark:text-neutral-400">Yesterday, 3:11 PM</span>
+          </div>
+        </div>
+        <span class="text-sm font-bold text-red-600 dark:text-red-500">-GH₵ 150</span>
+      </div>
+      
+      <div class="flex justify-between items-center py-2 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/30 rounded-xl px-2 transition">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full font-bold text-xs bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 dark:text-yellow-400">MM</div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">MTN Mobile Money</span>
+            <span class="text-[10px] text-neutral-500 dark:text-neutral-400">Mon, 9:00 AM</span>
+          </div>
+        </div>
+        <span class="text-sm font-bold text-green-600 dark:text-green-500">+GH₵ 1,200</span>
+      </div>
+    </div>
+  </HeroSection>
+
+  <ClientsSection
+    title="Operate Globally, Pay Locally"
+    subTitle="Move money seamlessly with integrations trusted by top financial agents across the region."
+    partners={partnersData}
+  />
+
+  <FeaturesGeneral
+    title="Everything you need to move money"
+    subTitle="One platform for personal transfers, business payments, and cross-border transactions across Africa."
+    src={featureImage}
+    alt="AlphaPay secure transaction portal preview"
+    features={features}
+  />
+
+  <FeaturesNavs
+    title=`Enjoy next-level convenience with <span class="text-blue-600 dark:text-blue-500">AlphaPay</span>'s advanced features.`
+    tabs={[
+      {
+        heading: 'Mobile money wallets',
+        content:
+          "Send money directly to MTN, Telecel/Vodafone Cash, AirtelTigo, M-Pesa, and Orange Money wallets instantly across 15+ countries.",
+        svg: 'mobile',
+        src: tools,
+        alt: 'Mobile transaction interface concept illustration',
+        first: true,
+      },
+      {
+        heading: 'Intuitive business dashboard',
+        content:
+          "Manage your finances with ease. Bulk payments, collections, payment gateway API, and merchant analytics designed for growing enterprises.",
+        svg: 'dashboard',
+        src: dashboard,
+        alt: 'AlphaPay merchant analytics dashboard',
+        second: true,
+      },
+      {
+        heading: 'Robust Cloud Security',
+        content:
+          "Rest easy knowing your transfers are secure. Fully deployed on highly available AWS servers (EC2 + ALB) with CloudFront CDN and SSL encryption.",
+        svg: 'lock',
+        src: construction,
+        alt: 'Secured global server infrastructure conceptual view',
+      },
+    ]}
+  />
+
+  <!-- Operating Countries grid (from original static page) -->
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full border-t border-neutral-200 dark:border-neutral-700">
+    <div class="mx-auto mb-8 w-full space-y-1 text-center sm:w-1/2 lg:w-1/3">
+      <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-500">We operate in</span>
+      <h2 class="text-2xl leading-tight font-bold text-neutral-800 sm:text-3xl dark:text-neutral-200">
+        Sending across Africa and beyond
+      </h2>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3">
+      {["🇬🇭 Ghana", "🇳🇬 Nigeria", "🇰🇪 Kenya", "🇺🇬 Uganda", "🇷🇼 Rwanda", "🇿🇦 South Africa", "🇹🇿 Tanzania", "🇸🇳 Senegal", "🇨🇮 Côte d'Ivoire", "🌍 + more"].map((country) => (
+        <span class="px-5 py-2.5 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 rounded-full text-sm font-semibold text-neutral-800 dark:text-neutral-200 shadow-xs hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50/20 transition cursor-pointer">
+          {country}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- About Section detailing the Cloud Infrastructure deployment (from original static page) -->
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full border-t border-neutral-200 dark:border-neutral-700" id="about">
+    <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-500">About AlphaPay</span>
+        <h2 class="text-3xl font-extrabold tracking-tight text-neutral-800 sm:text-4xl dark:text-neutral-200 mt-2">
+          Built by Africans, <br/>for Africa
+        </h2>
+        <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+          AlphaPay was built by <strong>Team Alpha</strong> as part of the Azubi Africa Internship Programme — Project 1: End-to-End Cloud Solution Design & Deployment.
+        </p>
+        <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+          The platform is hosted on <strong>Amazon EC2</strong>, distributed through an <strong>Application Load Balancer</strong>, secured with <strong>ACM SSL</strong>, delivered via <strong>Amazon CloudFront CDN</strong>, and fully deployed using infrastructure as code with <strong>Terraform</strong>.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6">
+          {["AWS EC2", "ALB", "CloudFront", "S3", "ACM", "Terraform", "GitHub Actions", "IAM"].map((tech) => (
+            <span class="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-lg text-xs font-semibold">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+      
+      <div class="bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 rounded-3xl p-6 shadow-xl">
+        <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-200 mb-4 flex items-center gap-2">
+          🛡️ Security Status
+        </h3>
+        {[
+          { label: "HTTPS Secured", status: "Active" },
+          { label: "ALB Health Checks", status: "Healthy" },
+          { label: "CloudFront CDN", status: "Enabled" },
+          { label: "CI/CD Pipeline", status: "Live" },
+          { label: "IAM Least Privilege", status: "Applied" },
+          { label: "S3 Origin Access", status: "OAC Only" }
+        ].map((item) => (
+          <div class="flex justify-between items-center py-3 border-b border-neutral-200 dark:border-neutral-800 last:border-0">
+            <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">{item.label}</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300">
+              ✅ {item.status}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TestimonialsSection
+    title="Trusted across the continent"
+    subTitle="AlphaPay has become the preferred choice for seamless payments and cross-border transactions in Africa."
+    testimonials={[
+      {
+        content:
+          'AlphaPay completely changed how we pay our remote team in Kenya and Nigeria. Setup was instant, transfers are under 2 seconds, and the zero fees on local transfers saved us a fortune.',
+        author: 'Samantha Ruiz',
+        role: 'Operations Director | AfricaTech Group',
+        avatarSrc:
+          'https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
+      },
+    ]}
+    statistics={[
+      {
+        count: '500k+',
+        description:
+          'active users sending and receiving money daily',
+      },
+      {
+        count: '0%',
+        description:
+          'transfer fees on all local transactions',
+      },
+      {
+        count: '15+',
+        description:
+          'African countries supported with instant settlement',
+      },
+      {
+        count: '2 sec',
+        description: 'average transfer time to banks and wallets',
+      },
+    ]}
+  />
+
+  <PricingSection pricing={pricing} />
+
+  <FAQ title="Frequently<br />asked questions" faqs={faqs} />
+
+  <!-- Team section displaying 6 Team Alpha members (from original static page) -->
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full border-t border-neutral-200 dark:border-neutral-700/60" id="contact">
+    <div class="mx-auto mb-10 w-full space-y-2 text-center sm:w-1/2 lg:w-1/3">
+      <span class="text-xs font-bold uppercase tracking-wider text-orange-450 dark:text-orange-400">The team</span>
+      <h2 class="text-2xl leading-tight font-extrabold text-neutral-800 sm:text-3xl dark:text-neutral-100">
+        Team Alpha
+      </h2>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+        Azubi Africa Intern Cohort — Project 1: End-to-End Cloud Solution Design & Deployment
+      </p>
+    </div>
+    
+    <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {[
+        { name: "Mustapha Haadi", role: "Developer" },
+        { name: "David Yirenkyi", role: "Developer" },
+        { name: "Emmanuel Yelisomah", role: "Developer" },
+        { name: "Daniel Hanson Reynolds", role: "Developer" },
+        { name: "Zakaria Adeeba", role: "Developer" },
+        { name: "Evame Cobblah", role: "Developer" }
+      ].map((member) => (
+        <div class="flex flex-col items-center justify-center p-6 border rounded-2xl text-center shadow-xs transition duration-350 hover:scale-[1.03] hover:shadow-md bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 hover:border-yellow-400 dark:hover:border-yellow-500/50">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full font-black text-lg mb-3 shadow-xs bg-gradient-to-br from-yellow-400 to-orange-400 text-neutral-800">
+            {member.name.split(" ").map(n => n[0]).join("")}
+          </div>
+          <span class="text-sm font-bold text-neutral-800 dark:text-neutral-200">{member.name}</span>
+          <span class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-semibold">{member.role}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <HeroSectionAlt
+    title="Start moving money today"
+    subTitle="Join thousands of Africans who trust AlphaPay for fast, secure, and free transfers."
+    url="/signup"
+  />
+</MainLayout>

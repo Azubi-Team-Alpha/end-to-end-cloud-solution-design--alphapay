@@ -1,0 +1,11 @@
+---
+const { class: className } = Astro.props;
+---
+<div class={`flex items-center gap-2 ${className || ''}`}>
+  <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-600 font-black text-white text-base shadow-md">
+    A
+  </div>
+  <span class="text-xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100">
+    AlphaPay
+  </span>
+</div>

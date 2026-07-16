@@ -1,0 +1,32 @@
+[
+  {
+    "heading": "Transferts instantanés",
+    "content": "Envoyez de l'argent vers n'importe quel compte bancaire ou de paiement mobile en quelques secondes. Disponible 24h/24, 7j/7.",
+    "svg": "transfer"
+  },
+  {
+    "heading": "Carte virtuelle",
+    "content": "Obtenez une carte Visa virtuelle instantanément. Achetez en ligne, abonnez-vous globalement, payez en USD.",
+    "svg": "card"
+  },
+  {
+    "heading": "Sécurité de niveau bancaire",
+    "content": "Cryptage 256 bits, 2FA et surveillance des fraudes en temps réel sur chaque transaction.",
+    "svg": "lock"
+  },
+  {
+    "heading": "Paiements transfrontaliers",
+    "content": "Envoyez vers plus de 15 pays africains avec les meilleurs taux de change disponibles.",
+    "svg": "earth"
+  },
+  {
+    "heading": "Paiement mobile",
+    "content": "MTN, Vodafone, Airtel — envoyez directement vers n'importe quel portefeuille mobile instantanément.",
+    "svg": "mobile"
+  },
+  {
+    "heading": "Tableau de bord d'entreprise",
+    "content": "Paiements de masse, collectes et analyses pour les entreprises en croissance.",
+    "svg": "dashboard"
+  }
+]

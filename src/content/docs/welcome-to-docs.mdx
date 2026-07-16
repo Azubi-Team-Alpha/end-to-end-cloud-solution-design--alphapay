@@ -1,0 +1,48 @@
+---
+title: AlphaPay Docs
+head:
+  - tag: title
+    content: AlphaPay Developer Documentation
+description: AlphaPay's official developer documentation — integrate payments, manage wallets, and automate transfers across Africa.
+template: splash
+editUrl: false
+lastUpdated: false
+next: false
+hero:
+  title: AlphaPay Documentation Hub
+  tagline: Everything you need to integrate, build, and scale with AlphaPay's payment infrastructure across Africa.
+  image:
+      alt: AlphaPay's Logo
+      dark: ../../images/starlight/screwfast_hero.svg
+      light: ../../images/starlight/screwfast_hero_dark.svg
+  actions:
+    - text: Get started
+      icon: right-arrow
+      variant: primary
+      link: /guides/getting-started/
+    - text: View on GitHub
+      icon: external
+      variant: minimal
+      link: https://github.com/Mustapha-Haadi/internship-cloud-solution-design
+---
+import "@styles/starlight_main.css";
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+
+  <Card title="Quick Start Guides" icon="document">
+    Get up and running with AlphaPay in minutes. Step-by-step guides for account setup, KYC verification, and your first API call.
+  </Card>
+
+  <Card title="Transfers & Payments API" icon="seti:eslint">
+    Full reference for AlphaPay's RESTful Payments API — initiate transfers, check balances, manage wallets, and collect payments programmatically.
+  </Card>
+
+   <Card title="Webhooks & Events" icon="seti:puppet">
+    Set up real-time webhook notifications for payment success, failures, refunds, and settlement events in your application.
+  </Card>
+
+   <Card title="Advanced Topics" icon="seti:terraform">
+    Deep dives into AML compliance integration, bulk disbursement optimization, multi-currency FX handling, and production deployment best practices.
+  </Card>
+</CardGrid>

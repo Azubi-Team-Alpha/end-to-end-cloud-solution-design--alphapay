@@ -1,0 +1,29 @@
+{
+  "subTitle": "Des questions sur AlphaPay ? Trouvez des réponses instantanées à nos questions les plus fréquemment posées ici.",
+  "faqs": [
+    {
+      "question": "Quelle est la rapidité des transferts sur AlphaPay ?",
+      "answer": "Les transferts sur AlphaPay sont instantanés. L'argent est envoyé sur le compte bancaire ou le portefeuille mobile du destinataire en moins de 2 secondes, et le service est disponible 24h/24 et 7j/7."
+    },
+    {
+      "question": "Y a-t-il des frais pour l'envoi d'argent ?",
+      "answer": "Les transferts locaux au sein du même pays sont entièrement gratuits (zéro frais). Les transferts transfrontaliers entre différents pays africains utilisent des taux de change hautement compétitifs du marché intermédiaire avec des frais de transaction minimes et transparents affichés à l'avance."
+    },
+    {
+      "question": "Comment obtenir une carte Visa virtuelle ?",
+      "answer": "Vous pouvez générer une carte virtuelle directement depuis votre tableau de bord en moins d'une minute. Vous pouvez l'utiliser pour payer vos achats en ligne, vos abonnements mondiaux et vos services internationaux en USD."
+    },
+    {
+      "question": "AlphaPay est-il sécurisé ?",
+      "answer": "Oui, AlphaPay est doté d'une sécurité de niveau bancaire. Il utilise un cryptage SSL 256 bits, une authentification 2FA et une détection automatique des fraudes en temps réel. Il est déployé de manière sécurisée sur AWS derrière un Application Load Balancer avec des certificats SSL ACM."
+    },
+    {
+      "question": "Quels réseaux de paiement mobile sont pris en charge ?",
+      "answer": "AlphaPay prend en charge tous les principaux réseaux de paiement mobile dans nos pays actifs, notamment MTN Mobile Money, Telecel/Vodafone Cash, AirtelTigo, M-Pesa et Orange Money, ainsi que les dépôts bancaires directs."
+    },
+    {
+      "question": "Qui a construit AlphaPay ?",
+      "answer": "AlphaPay a été conçu et construit par l'Équipe Alpha dans le cadre du programme de stage Azubi Africa - Projet de synthèse 1 : Conception et déploiement de solutions cloud de bout en bout."
+    }
+  ]
+}

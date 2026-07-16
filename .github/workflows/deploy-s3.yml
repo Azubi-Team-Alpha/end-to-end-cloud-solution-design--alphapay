@@ -1,0 +1,78 @@
+name: Deploy AlphaPay to AWS S3
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+  S3_BUCKET: alphapay-africa-static
+  CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to S3
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Setup Node.js ─────────────────────────────────────────────────────
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # ── 3. Install dependencies ───────────────────────────────────────────────
+      - name: Install dependencies
+        run: npm ci
+
+      # ── 4. Build Astro site ───────────────────────────────────────────────────
+      - name: Build static site
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      # ── 5. Configure AWS credentials ─────────────────────────────────────────
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # ── 6. Sync dist/ to S3 ──────────────────────────────────────────────────
+      - name: Deploy to S3
+        run: |
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }} \
+            --delete \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude "*.html" \
+            --exclude "*.json"
+
+          # HTML & JSON with shorter cache (revalidate more frequently)
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }} \
+            --delete \
+            --cache-control "public, max-age=0, must-revalidate" \
+            --include "*.html" \
+            --include "*.json"
+
+      # ── 7. Invalidate CloudFront cache ───────────────────────────────────────
+      - name: Invalidate CloudFront distribution
+        if: env.CLOUDFRONT_DISTRIBUTION_ID != ''
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
+
+      # ── 8. Output site URL ───────────────────────────────────────────────────
+      - name: Deployment summary
+        run: |
+          echo "✅ AlphaPay deployed to S3!"
+          echo "🌐 Bucket: s3://${{ env.S3_BUCKET }}"
+          echo "⚡ CloudFront cache invalidated"

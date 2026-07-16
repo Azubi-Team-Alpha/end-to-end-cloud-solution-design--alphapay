@@ -1,0 +1,73 @@
+---
+title: Cross-Border Transfers
+description: Send money across 15+ African countries with AlphaPay's cross-border transfer infrastructure.
+sidebar:
+  label: Cross-Border Transfers
+  order: 2
+---
+import { Steps, Aside } from "@astrojs/starlight/components";
+
+AlphaPay's cross-border infrastructure enables instant transfers across 15+ African countries using direct integrations with local mobile money networks and commercial banks.
+
+## Supported Corridors
+
+| From | To | Method | Speed |
+|---|---|---|---|
+| Ghana (GHS) | Nigeria (NGN) | Bank transfer | < 2 seconds |
+| Ghana (GHS) | Kenya (KES) | M-Pesa | < 2 seconds |
+| Ghana (GHS) | Uganda (UGX) | MTN Mobile Money | < 2 seconds |
+| Nigeria (NGN) | Kenya (KES) | Bank / M-Pesa | < 2 seconds |
+| Kenya (KES) | Rwanda (RWF) | MTN Mobile Money | < 2 seconds |
+| Ghana (GHS) | Senegal (XOF) | Orange Money | < 2 seconds |
+
+## Initiating a Cross-Border Transfer
+
+```bash
+curl -X POST https://api.alphapay.africa/v1/transfers/international \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{
+    "source_currency": "GHS",
+    "destination_currency": "NGN",
+    "source_amount": 500,
+    "recipient_phone": "+2348012345678",
+    "network": "bank",
+    "bank_code": "058",
+    "account_number": "0123456789",
+    "description": "Family support"
+  }'
+```
+
+<Aside type="tip">
+  Always call `GET /v1/fx-rates?from=GHS&to=NGN` first to show the recipient amount to the sender before they confirm.
+</Aside>
+
+## Getting FX Rates
+
+```bash
+curl https://api.alphapay.africa/v1/fx-rates?from=GHS&to=NGN \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+Response:
+```json
+{
+  "from": "GHS",
+  "to": "NGN",
+  "rate": 72.45,
+  "fee_pct": 0.5,
+  "rate_expires_at": "2024-07-15T10:25:00Z"
+}
+```
+
+The rate is guaranteed for 60 seconds. If the transfer is not initiated within that window, refresh the rate.
+
+## Compliance Requirements for Cross-Border
+
+<Steps>
+1. Sender must be KYC-verified (Tier 2 or above) to initiate cross-border transfers
+
+2. Provide an accurate transfer purpose (`description`) — this is used for regulatory reporting
+
+3. Transfers above $1,000 USD equivalent may require additional sender documentation
+
+</Steps>

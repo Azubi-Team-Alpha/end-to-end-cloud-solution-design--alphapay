@@ -1,0 +1,39 @@
+{
+  "title": "Simple, Transparent Pricing",
+  "subTitle": "Choose the account type that fits your financial needs. No hidden charges.",
+  "badge": "Popular",
+  "thirdOption": "Looking for business solutions?",
+  "btnText": "Contact Business Sales",
+
+  "starterKit": {
+    "name": "Personal Account",
+    "description": "Best option for individuals and families",
+    "price": "0",
+    "cents": ".00",
+    "billingFrequency": "USD / forever free",
+    "features": [
+      "Zero fees on local transfers",
+      "Instant mobile money & bank transfers",
+      "24/7 client support",
+      "Virtual Visa card access"
+    ],
+    "purchaseBtnTitle": "Get Started",
+    "purchaseLink": "#"
+  },
+
+  "professionalToolbox": {
+    "name": "Business Account",
+    "description": "Best for merchants and growing enterprises",
+    "price": "Custom",
+    "cents": "",
+    "billingFrequency": "Transaction-based fees",
+    "features": [
+      "Bulk payouts and payouts API",
+      "Payment gateway & collections api",
+      "Comprehensive merchant analytics",
+      "Priority dedicated support"
+    ],
+    "purchaseBtnTitle": "Open a Business Account",
+    "purchaseLink": "#"
+  }
+}

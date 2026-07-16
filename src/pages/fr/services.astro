@@ -1,0 +1,171 @@
+---
+// Import necessary components
+import MainLayout from '@/layouts/MainLayout.astro';
+import MainSection from '@components/ui/blocks/MainSection.astro';
+import LeftSection from '@components/ui/blocks/LeftSection.astro';
+import RightSection from '@components/ui/blocks/RightSection.astro';
+import FeaturesStats from '@components/sections/features/FeaturesStats.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+// Import necessary images
+import onboarding from '@images/blueprints-image.avif';
+import personWorking from '@images/person-working.avif';
+import support from '@images/before-after.avif';
+import businessDash from '@images/construction-workers.avif';
+import compliance from '@images/aerial-view.avif';
+import security from '@images/under-construction.avif';
+
+interface Article {
+  isRightSection: boolean;
+  title: string;
+  subTitle: string;
+  btnExists?: boolean;
+  btnTitle?: string;
+  btnURL?: string;
+  single?: boolean;
+  img?: any;
+  imgAlt?: string;
+  imgOne?: any;
+  imgOneAlt?: string;
+  imgTwo?: any;
+  imgTwoAlt?: string;
+}
+
+const articles: Article[] = [
+  {
+    isRightSection: true,
+    title: 'Inscription rapide et simple',
+    subTitle:
+      "L'inscription à AlphaPay prend moins de 5 minutes. Notre processus d'intégration guidé vous accompagne à travers la vérification d'identité KYC, la création de portefeuille et la liaison de votre compte bancaire ou numéro de mobile money. Notre équipe est disponible 24h/7j pour aider les particuliers et les entreprises à être opérationnels dès le premier jour.",
+    single: false,
+    imgOne: onboarding,
+    imgOneAlt: "Équipe AlphaPay aidant un nouvel utilisateur avec la vérification KYC sur ordinateur.",
+    imgTwo: personWorking,
+    imgTwoAlt: "Développeur intégrant l'API de paiement AlphaPay sur un double écran.",
+  },
+  {
+    isRightSection: false,
+    title: 'Assistance clientèle 24h/7j',
+    subTitle:
+      "Nos agents de support dédiés sont disponibles en permanence via le chat en direct, l'email et le téléphone. Que vous ayez un transfert bloqué, une question de facturation ou besoin d'aide pour naviguer dans une fonctionnalité, notre équipe à Accra est toujours prête à résoudre votre problème en moins de 2 heures — garanti.",
+    img: support,
+    imgAlt: "Agent de support client AlphaPay souriant dans un centre d'appel moderne à Accra.",
+    btnExists: true,
+    btnTitle: 'Contacter le support',
+    btnURL: getRelativeLocaleUrl('fr', 'contact'),
+  },
+  {
+    isRightSection: true,
+    title: 'Paiements professionnels & paie',
+    subTitle:
+      "AlphaPay pour les entreprises donne aux commerçants et aux entreprises un contrôle total sur leurs finances. Envoyez des virements de paie en masse à des centaines d'employés en quelques secondes, collectez des paiements via notre API de paiement et obtenez des analyses approfondies de vos revenus, délais de règlement et taux de réussite des transactions.",
+    single: false,
+    imgOne: businessDash,
+    imgOneAlt: "Femme d'affaires africaine consultant les rapports de paie et analyses sur tablette.",
+    imgTwo: compliance,
+    imgTwoAlt: "Schéma du cadre de conformité réglementaire AML et KYC pour la fintech africaine.",
+  },
+  {
+    isRightSection: false,
+    title: 'API développeur & intégrations',
+    subTitle:
+      "Notre API de paiement RESTful permet aux développeurs d'intégrer AlphaPay dans n'importe quelle plateforme en quelques heures. Documentation complète, environnements sandbox, support webhook et SDK pour les frameworks populaires sont tous disponibles. Acceptez des paiements, initiez des transferts et interrogez les soldes par programmation.",
+    img: personWorking,
+    imgAlt: "Développeur travaillant avec l'API de passerelle de paiement AlphaPay et les journaux webhook.",
+    btnExists: true,
+    btnTitle: "Voir la documentation API",
+    btnURL: '#',
+  },
+  {
+    isRightSection: true,
+    title: 'Conformité réglementaire & sécurité',
+    subTitle:
+      "AlphaPay est entièrement conforme à la Banque du Ghana (BoG), à la Banque Centrale du Nigeria (CBN) et aux autres organismes de réglementation africains. Nous mettons en œuvre la surveillance des transactions AML, la vérification d'identité KYC, l'authentification biométrique et la détection des fraudes en temps réel — le tout sur une infrastructure AWS hautement disponible.",
+    single: false,
+    imgOne: compliance,
+    imgOneAlt: "Bouclier de conformité réglementaire fintech africaine avec workflow AML et KYC.",
+    imgTwo: security,
+    imgTwoAlt: "Infrastructure de sécurité cloud AWS protégeant les transactions AlphaPay.",
+    btnExists: true,
+    btnTitle: 'En savoir plus sur la sécurité',
+    btnURL: '#',
+  },
+];
+---
+
+<MainLayout
+  title="Services | AlphaPay"
+  lang="fr"
+  structuredData={{
+    '@context': '#!',
+    '@type': '#!',
+    '@id': '#!',
+    url: '#!',
+    name: 'Services AlphaPay | Plateforme de paiement fintech africaine',
+    description:
+      "AlphaPay offre une inscription rapide, un support 24h/7j, des paiements professionnels, des API de paiement et une conformité réglementaire complète à travers l'Afrique.",
+    isPartOf: {
+      '@type': '#!',
+      url: '#!',
+      name: 'AlphaPay',
+      description: "Envoyez, recevez et gérez de l'argent instantanément à travers l'Afrique.",
+    },
+    inLanguage: 'fr',
+  }}
+>
+  <MainSection
+    title="Tout ce dont vous avez besoin pour transférer de l'argent"
+    subTitle="AlphaPay fournit des services financiers de bout en bout — des transferts personnels instantanés et des cartes virtuelles aux API de paiement d'entreprise et à la conformité réglementaire — le tout construit sur une infrastructure cloud AWS robuste."
+    btnExists={true}
+    btnTitle="Commencer gratuitement"
+    btnURL={getRelativeLocaleUrl('fr', '#')}
+  />
+  {
+    articles.map(article => {
+      return article.isRightSection ? (
+        <RightSection
+          title={article.title}
+          subTitle={article.subTitle}
+          single={article.single}
+          imgOne={article.imgOne}
+          imgOneAlt={article.imgOneAlt}
+          imgTwo={article.imgTwo}
+          imgTwoAlt={article.imgTwoAlt}
+          btnExists={article.btnExists}
+          btnTitle={article.btnTitle}
+          btnURL={article.btnURL}
+        />
+      ) : (
+        <LeftSection
+          title={article.title}
+          subTitle={article.subTitle}
+          img={article.img}
+          imgAlt={article.imgAlt}
+          btnExists={article.btnExists}
+          btnTitle={article.btnTitle}
+          btnURL={article.btnURL}
+        />
+      );
+    })
+  }
+  <FeaturesStats
+    title="AlphaPay en chiffres"
+    subTitle="Notre engagement envers la vitesse, la fiabilité et la sécurité se reflète dans les chiffres. Chaque transaction traitée par AlphaPay fonctionne sur une infrastructure AWS de niveau entreprise avec une disponibilité de 99,99%."
+    mainStatTitle="500k+"
+    mainStatSubTitle="utilisateurs actifs envoyant et recevant de l'argent quotidiennement à travers l'Afrique"
+    stats={[
+      {
+        stat: '99,99%',
+        description: "disponibilité de la plateforme sur l'infrastructure AWS",
+      },
+      {
+        stat: '<2 sec',
+        description: 'temps de transfert moyen vers les banques et les portefeuilles',
+      },
+      {
+        stat: '15+',
+        description: 'pays africains avec règlement instantané',
+      },
+    ]}
+  />
+</MainLayout>
