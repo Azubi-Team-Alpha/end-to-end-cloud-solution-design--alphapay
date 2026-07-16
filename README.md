@@ -1,7 +1,7 @@
 # AlphaPay — African Cross-Border Payments Platform
 
 > **Azubi Africa Internship Programme** — Capstone Project 1: End-to-End Cloud Solution Design & Deployment  
-> **Team:** Team Alpha | **Cohort:** 2024
+> **Team:** Team Alpha | **Cohort:** 2026 (GEN 5)
 
 ---
 
@@ -15,7 +15,7 @@ The platform is built as an interactive static **Astro** Single Page Application
 
 ## Live Site
 
-🌐 **[alphapay.africa](https://alphapay.africa)**
+🌐 **[alphapay.africa](https://alphapay.teamalpha.live)**
 
 ---
 
@@ -62,8 +62,8 @@ The platform is built as an interactive static **Astro** Single Page Application
 
 ```bash
 # Clone the repository
-git clone https://github.com/Mustapha-Haadi/internship-cloud-solution-design.git
-cd internship-cloud-solution-design
+git clone https://github.com/Azubi-Team-Alpha/end-to-end-cloud-solution-design--alphapay.git
+cd end-to-end-cloud-solution-design--alphapay
 
 # Install dependencies
 npm install
