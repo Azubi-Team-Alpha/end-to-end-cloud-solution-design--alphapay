@@ -107,7 +107,7 @@ User → Route 53 (DNS) → CloudFront (CDN + SSL) → Nginx (EC2 Instance Serve
 ### 1. Launch the EC2 Instance
 1. Open the **Amazon EC2 Console** → click **Launch Instance**.
 2. **Name**: `alphapay-web-server`.
-3. **OS Image (AMI)**: Select **Ubuntu Server 24.04 LTS** (Free Tier eligible).
+3. **OS Image (AMI)**: Select **Amazon Linux 2023 AMI** (Free Tier eligible).
 4. **Instance Type**: Select **t2.micro** or **t3.micro**.
 5. **Key Pair**: Select or create a new key pair (e.g. `alphapay-key.pem`) to access the instance over SSH.
 6. **Network Settings** (Security Group):
@@ -127,12 +127,12 @@ To ensure the server public IP remains static across restarts:
 ### 3. Install Nginx and Dependencies
 SSH into your instance:
 ```bash
-ssh -i "alphapay-key.pem" ubuntu@YOUR_EC2_PUBLIC_IP
+ssh -i "alphapay-key.pem" ec2-user@YOUR_EC2_PUBLIC_IP
 ```
 Update server packages and install Nginx:
 ```bash
-sudo apt update -y && sudo apt upgrade -y
-sudo apt install nginx -y
+sudo dnf update -y
+sudo dnf install nginx -y
 sudo systemctl enable nginx
 sudo systemctl start nginx
 ```
@@ -141,7 +141,7 @@ sudo systemctl start nginx
 1. Create a directory to store the Astro built web files:
 ```bash
 sudo mkdir -p /var/www/alphapay
-sudo chown -R ubuntu:ubuntu /var/www/alphapay
+sudo chown -R ec2-user:ec2-user /var/www/alphapay
 ```
 2. Create an Nginx server configuration:
 ```bash
@@ -195,16 +195,22 @@ npm run build
 ```
 2. Deploy the build output (`dist/` folder) to the EC2 server:
 ```bash
-rsync -avz --delete -e "ssh -i alphapay-key.pem" dist/ ubuntu@YOUR_EC2_PUBLIC_IP:/var/www/alphapay/
+rsync -avz --delete -e "ssh -i alphapay-key.pem" dist/ ec2-user@YOUR_EC2_PUBLIC_IP:/var/www/alphapay/
 ```
 
-### 6. Configure SSL Certificate via Let's Encrypt (Certbot)
-Run the following inside your EC2 terminal to obtain a free SSL certificate:
-```bash
-sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d alphapay.africa -d www.alphapay.africa
-# Certbot will verify the domains and configure the HTTPS settings inside Nginx automatically.
-```
+### 6. SSL Configuration: Let's Encrypt (Certbot) Challenge & AWS ACM Transition
+During initial configuration, the team encountered a significant SSL validation blocker when setting up HTTPS.
+
+#### The Let's Encrypt / Certbot Challenge:
+Initially, the team attempted to provision a standalone Let's Encrypt SSL certificate at the EC2 server level using Certbot. While this worked for direct IP/host traffic to the instance, it caused SSL validation errors when integrated with Amazon CloudFront. CloudFront requires that SSL certificates for custom alternate domain names (CNAMEs) be provisioned in **AWS Certificate Manager (ACM)** in the `us-east-1` (N. Virginia) region. Because the Let's Encrypt certificate was hosted on the EC2 origin in a different region and was not managed by ACM, CloudFront flagged the origin SSL provider as unverified, breaking the secure connection.
+
+#### The ACM Resolution:
+To bypass this limitation, the team requested and attached a certificate through ACM:
+1. During CloudFront distribution configuration, under **Custom SSL certificate**, click **Request certificate** (redirecting to AWS Certificate Manager).
+2. Request a public certificate for `*.alphateam.live` and `alphateam.live`.
+3. Choose **DNS validation** as the validation method.
+4. Click **Create records in Route 53** to automatically write the ACM verification CNAME records into the `alphateam.live` hosted zone.
+5. Once the certificate status changes to **Issued**, return to CloudFront, select the certificate, and complete the distribution setup. This secures all client-to-CDN traffic with a verified certificate.
 
 ### 7. Configure CloudFront as a CDN for the EC2 Instance
 To cache content globally and protect the EC2 instance from DDoS attacks:
@@ -267,13 +273,9 @@ To authorize the EC2 instance to pull files from S3 without hardcoding secret ke
 Setup Nginx to serve the `/var/www/alphapay` directory (use the same Nginx configuration detailed in **Option B, Step 4**).
 
 ### 3. Install AWS CLI on the EC2 Server
-Connect to your EC2 instance via SSH and install the AWS Command Line Interface:
+AWS CLI is pre-installed on Amazon Linux 2023. Connect to your EC2 instance via SSH and verify access or install unzip if needed:
 ```bash
-sudo apt update -y
-sudo apt install unzip -y
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
+sudo dnf install unzip -y
 # Verify integration (should list files without needing config keys)
 aws s3 ls s3://alphapay-africa-static
 ```
@@ -290,7 +292,7 @@ sudo nano /usr/local/bin/sync-s3-to-nginx.sh
 aws s3 sync s3://alphapay-africa-static /var/www/alphapay/ --delete
 
 # Set permissions
-chown -R ubuntu:ubuntu /var/www/alphapay/
+chown -R ec2-user:ec2-user /var/www/alphapay/
 chmod -R 755 /var/www/alphapay/
 ```
 3. Make the script executable:
@@ -314,27 +316,21 @@ Refer to **Option B, Steps 6 & 7** to configure Let's Encrypt SSL certificates f
 
 ---
 
-## Custom Domain Setup (Route 53)
-Create an Alias record pointing your domain to the CloudFront distribution:
-```bash
-# UPSERT Route 53 CNAME/A Alias to Route requests to CloudFront
-aws route53 change-resource-record-sets \
-  --hosted-zone-id YOUR_ZONE_ID \
-  --change-batch '{
-    "Changes": [{
-      "Action": "UPSERT",
-      "ResourceRecordSet": {
-        "Name": "alphapay.africa",
-        "Type": "A",
-        "AliasTarget": {
-          "HostedZoneId": "Z2FDTNDATAQYW2",
-          "DNSName": "YOUR_CLOUDFRONT_DOMAIN.cloudfront.net.",
-          "EvaluateTargetHealth": false
-        }
-      }
-    }]
-  }'
-```
+## Custom Domain Setup: Route 53 & Cloudflare DNS Integration
+During deployment, mapping the custom domain introduced routing challenges.
+
+### 1. The Subdomain Blocking Challenge:
+Initially, when the subdomain `alphapay.alphateam.live` was added and routed directly, client connections were blocked or failed to load. This occurred due to propagation delays, registrar name resolution restrictions, and protocol conflicts between the registrar's default DNS settings and CloudFront.
+
+### 2. The Cloudflare Resolution & Workaround:
+To resolve the blockage, the team migrated the DNS management of the domain and subdomains to **Cloudflare**:
+1. Added the parent domain `alphateam.live` to Cloudflare, updating name servers at the registrar to match the assigned Cloudflare nameservers.
+2. In the Cloudflare DNS Zone management panel, created a new resource record:
+   - **Type**: `CNAME`
+   - **Name**: `alphapay`
+   - **Target**: CloudFront distribution domain (`d36463bhurzw5c.cloudfront.net`)
+3. **Proxy Status Workaround**: The proxy status was set to **DNS Only** (grey cloud). Bypassing Cloudflare's HTTP proxy was necessary because having the Cloudflare proxy enabled (orange cloud) would trigger SSL conflicts (a double-proxy configuration) where Cloudflare's edge certificate mismatched AWS CloudFront's ACM certificate, causing connection blockages.
+4. **SSL/TLS Mode**: For configurations where proxying is preferred, the Cloudflare SSL/TLS encryption tier was set to **Full (Strict)** to ensure the connection between Cloudflare and the CloudFront/ALB HTTPS origins remains validated.
 
 ---
 
