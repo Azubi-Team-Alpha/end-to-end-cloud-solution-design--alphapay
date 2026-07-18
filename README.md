@@ -17,7 +17,7 @@ The platform is built as an interactive static **Astro** Single Page Application
 
 The diagram below outlines the end-to-end cloud infrastructure of AlphaPay. It illustrates Route 53 DNS routing, the CloudFront global CDN distribution, the serverless S3 origin (Option A), the virtual server Nginx hosting via an ALB (Option B), and the hybrid S3-to-EC2 sync method (Option C), along with the automated GitHub Actions CI/CD pipelines.
 
-![AlphaPay AWS Architecture Diagram](docs/alphapay-architecture-diagram.png)
+![AlphaPay AWS Architecture Diagram](docs/alphapay-architecture-diagram.drawio.png)
 
 *Interactive Source:* 🌐 **[Open/Edit in Draw.io (Google Drive)](https://drive.google.com/file/d/1hs1qO98tOMvZOIirGhfb_jUCJuWc1JQX/view?usp=sharing)**
 
