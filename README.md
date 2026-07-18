@@ -25,7 +25,7 @@ The diagram below outlines the end-to-end cloud infrastructure of AlphaPay. It i
 
 ## Live Site
 
-🌐 **[alphapay.teamalpha.live](https://alphapay.teamalpha.live)**
+🌐 **[alphapay.alphateam.live](https://alphapay.alphateam.live)**
 
 ---
 
