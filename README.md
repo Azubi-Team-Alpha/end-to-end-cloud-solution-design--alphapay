@@ -162,7 +162,7 @@ These secrets are used to compile the project and upload the built assets to AWS
 |---|---|---|---|
 | `AWS_ACCESS_KEY_ID` | Access Key of the IAM deployment user. | **Yes** | - |
 | `AWS_SECRET_ACCESS_KEY` | Secret Key of the IAM deployment user. | **Yes** | - |
-| `AWS_REGION` | The AWS region where S3 is hosted. | No | `us-east-1` |
+| `AWS_REGION` | The AWS region where S3 bucket is hosted. | No | `us-east-1` |
 | `S3_BUCKET` | The target S3 bucket name. | No | `alphapay-africa-static` |
 | `CLOUDFRONT_DISTRIBUTION_ID` | CloudFront Distribution ID for cache invalidation. | No | *Skipped if unset* |
 
